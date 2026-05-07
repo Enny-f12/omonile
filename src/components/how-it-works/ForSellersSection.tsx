@@ -118,7 +118,7 @@ const STEPS = [
   {
     number: 5,
     title: 'Cooperate with Assigned Professionals',
-    image: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?w=600&q=80',
+    image: 'https://i.pinimg.com/736x/6e/44/73/6e4473f3132be32f8277623037621e57.jpg',
     imageAlt: 'Three professionals (lawyer, surveyor, facility manager) with checkmarks',
     bullets: [
       'Lawyer will contact you for:',
@@ -175,7 +175,7 @@ const STEPS = [
   {
     number: 7,
     title: 'Receive Offers & Negotiate',
-    image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600&q=80',
+    image: 'https://i.pinimg.com/1200x/af/b8/f0/afb8f07d06653b4d55ec72e716a07dc5.jpg',
     imageAlt: 'Dashboard with offer notifications and message icon',
     bullets: [
       'Receive notifications for:',
@@ -227,7 +227,7 @@ const BONUS_STEPS = [
   {
     id: 'C',
     title: 'Facility Manager Inspection',
-    image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=80',
+    image: 'https://i.pinimg.com/1200x/41/3d/18/413d187901751eee10530d308059444b.jpg',
     bullets: ['Mandatory before listing', 'Physical inspection', 'Photo verification', 'Amenities checklist', 'Neighborhood safety check'],
   },
 ];
@@ -306,9 +306,7 @@ export function ForSellersSection() {
               <div style={{ position: 'relative', minHeight: '220px', background: 'var(--bg-surface-2)', borderRight: '1px solid var(--border-subtle)' }}>
                 <Image src={step.image} alt={step.imageAlt} fill sizes="(max-width:640px) 100vw, 50vw" style={{ objectFit: 'cover' }} />
                 <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(135deg, ${C.colorBg} 0%, transparent 60%)` }} />
-                <div style={{ position: 'absolute', top: '0.75rem', left: '0.75rem', padding: '0.2rem 0.6rem', borderRadius: '6px', background: 'rgba(0,0,0,0.45)', backdropFilter: 'blur(6px)' }}>
-                  <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.62rem', fontWeight: 600, color: 'rgba(255,255,255,0.85)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>Illustration #{step.number}</span>
-                </div>
+                
               </div>
               <div style={{ padding: '1.25rem 1.5rem' }}>
                 <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>

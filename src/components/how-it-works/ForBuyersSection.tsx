@@ -99,7 +99,7 @@ const STEPS = [
   {
     number: 5,
     title: 'Receive Verification Certificate',
-    image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&q=80',
+    image: 'https://i.pinimg.com/1200x/12/dc/14/12dc1444903004f5565645787e804880.jpg',
     imageAlt: 'Digital certificate with QR code and blockchain hash',
     bullets: [
       'Digital certificate with QR code',
@@ -155,7 +155,7 @@ const STEPS = [
   {
     number: 8,
     title: 'Complete Transaction & Store Documents',
-    image: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=600&q=80',
+    image: 'https://i.pinimg.com/736x/89/c1/01/89c1014ba28ff30074257a3a2cb576b9.jpg',
     imageAlt: 'Document folder with lock and blockchain icon',
     bullets: [
       'Title deed transferred',
@@ -250,10 +250,7 @@ export function ForBuyersSection() {
                     style={{ objectFit: 'cover' }}
                   />
                   <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(26,107,60,0.15) 0%, transparent 60%)' }} />
-                  {/* Illustration label */}
-                  <div style={{ position: 'absolute', top: '0.75rem', left: '0.75rem', padding: '0.2rem 0.6rem', borderRadius: '6px', background: 'rgba(0,0,0,0.45)', backdropFilter: 'blur(6px)' }}>
-                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.62rem', fontWeight: 600, color: 'rgba(255,255,255,0.85)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>Illustration #{step.number}</span>
-                  </div>
+                 
                 </div>
 
                 {/* Right: bullet points */}

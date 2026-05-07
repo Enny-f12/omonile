@@ -66,7 +66,7 @@ const STEPS = [
   {
     number: 5,
     title: 'Book Your Stay (Instant Book or Request)',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80',
+    image: 'https://i.pinimg.com/736x/58/60/1a/58601a0329ac37588bc8884bbb923742.jpg',
     twoOptions: true,
     requirements: [
       'Property must be Facility Manager Verified',
@@ -79,9 +79,9 @@ const STEPS = [
     title: 'Provide Guest Details & Pay Securely',
     image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&q=80',
     bullets: [
-      'Step 6.1: Enter guest details (Full name, Email, Phone, NIN/BVN, Special requests)',
-      'Step 6.2: Review price breakdown',
-      'Step 6.3: Select payment method — Card (Visa/Mastercard), Bank Transfer, or Wallet',
+      ' Enter guest details (Full name, Email, Phone, NIN/BVN, Special requests)',
+      ' Review price breakdown',
+      ' Select payment method — Card (Visa/Mastercard), Bank Transfer, or Wallet',
     ],
     escrowDiagram: true,
   },
