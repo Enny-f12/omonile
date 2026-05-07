@@ -159,7 +159,7 @@ export function PropertyTypes() {
                 </div>
 
                 {/* 2×2 Grid */}
-                <div style={{
+                <div className="types-grid" style={{
                     display: 'grid',
                     gridTemplateColumns: 'repeat(2, 1fr)',
                     gap: '1rem',
@@ -171,7 +171,7 @@ export function PropertyTypes() {
             </div>
 
             <style>{`
-        @media (max-width: 480px) {
+        @media (max-width: 640px) {
           .types-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>

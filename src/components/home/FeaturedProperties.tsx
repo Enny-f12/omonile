@@ -430,7 +430,7 @@ export function FeaturedProperties() {
       <style>{`
         /* Mobile: 2 columns */
         .props-grid {
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: repeat(1fr);
         }
         /* Tablet: 3 columns */
         @media (min-width: 768px) {

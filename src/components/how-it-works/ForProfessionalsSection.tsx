@@ -1,163 +1,310 @@
+'use client';
+
 import Link from 'next/link';
-import { Scale, Ruler, Wrench, Crown, ClipboardList, ShieldCheck, UserCog, CreditCard, Inbox, FileCheck, Banknote, Home, Star, ArrowRight, Briefcase } from 'lucide-react';
-import { StepCard } from './StepCard';
+import Image from 'next/image';
+import { 
+  ArrowRight, 
+  Briefcase, 
+  CheckCircle2, 
+  Lightbulb, 
+  Info, 
+  Star, 
+  UserCheck, 
+  CreditCard} from 'lucide-react';
 
-const C = { color:'#7c3aed', colorBg:'rgba(124,58,237,0.08)', colorBorder:'rgba(124,58,237,0.22)' };
-const Cg= { color:'#1a6b3c', colorBg:'rgba(26,107,60,0.08)', colorBorder:'rgba(26,107,60,0.22)' };
+const B = { 
+  brand: '#1a6b3c', 
+  brandBg: 'rgba(26,107,60,0.08)', 
+  brandBorder: 'rgba(26,107,60,0.22)',
+  accent: '#e8a84c'
+};
 
-const ROLES = [
-  { Icon:Scale,  label:'Lawyer',           desc:'Title searches, document verification, state & federal registry checks.',  pay:'₦15,000–₦80,000 per case' },
-  { Icon:Ruler,  label:'Surveyor',         desc:'Physical property inspection, GPS-tagged reports, coordinate confirmation.',pay:'₦20,000–₦60,000 per inspection' },
-  { Icon:Wrench, label:'Facility Manager', desc:'Property check-ins, inspections, guest management, cleaning coordination.',  pay:'Commission per booking + monthly retainer' },
-  { Icon:Crown,  label:'Community Leader', desc:'Community dispute verification and land ownership engagement.',               pay:'₦5,000–₦15,000 per engagement' },
-];
-
-const STEPS = [
-  { Icon:ClipboardList, title:'Choose Your Professional Role',
-    description:'Select whether you\'re applying as a Lawyer, Surveyor, Facility Manager, or Community Leader. Each role has specific requirements and earning potential.',
-    details:['Lawyers: must be licensed by the NBA','Surveyors: must be registered with SURCON','Facility managers: training provided by Omonile','Community leaders: must have verifiable community standing'] },
-  { Icon:FileCheck,     title:'Submit Your Application',
-    description:'Complete the online application form. Upload your credentials, professional license, government ID, and a short bio.',
-    details:['Form takes approximately 15–20 minutes','Upload: professional license, NIN, bank details','References required for lawyers and surveyors'] },
-  { Icon:ShieldCheck,   title:'Complete Vetting & Verification',
-    description:'Our team reviews your application and conducts a background check. You may be contacted for a short virtual interview.',
-    details:['Background check conducted within 3 working days','Virtual interview for lawyers and surveyors','Identity verified against NIN/BVN database'] },
-  { Icon:UserCog,       title:'Set Up Your Professional Profile',
-    description:'Once approved, build your profile with your photo, bio, areas of coverage, and specialisations to attract more job requests.',
-    details:['Set your operating LGAs and coverage area','List your specialisations and years of experience','Higher profile completeness = more job assignments'] },
-  { Icon:CreditCard,    title:'Choose Your Subscription Plan',
-    description:'Select a subscription plan that matches your workload capacity. Higher plans give access to more job requests and premium listings.',
-    details:['Free plan: up to 3 jobs/month','Standard: ₦5,000/month — up to 15 jobs','Premium: ₦12,000/month — unlimited jobs + priority assignment'] },
-  { Icon:Inbox,         title:'Receive & Accept Job Requests',
-    description:'When a property in your coverage area needs your service, you receive an instant notification. Review the details and accept or decline.',
-    details:['Accept within 2 hours to avoid reassignment','View property location, type, and estimated pay before accepting','Decline without penalty up to 3 times per month'] },
-  { Icon:Wrench,        title:'Complete the Job & Submit Report',
-    description:'Carry out your professional duties — inspection, registry search, or community engagement — and submit your digital report within the required timeline.',
-    details:['Lawyers: 5 working days for title search','Surveyors: 2 working days after inspection','Facility managers: same-day report after check-in/check-out','All reports include GPS data, photos, and digital signature'] },
-  { Icon:Banknote,      title:'Get Paid & Build Your Reputation',
-    description:'Payment is released to your bank account within 48 hours of report approval. Clients rate your service, building your reputation on the platform.',
-    details:['Direct bank transfer — no delays','Ratings from clients boost your profile visibility','Top-rated professionals get priority job assignments','Earn the "Elite Professional" badge at 4.8+ rating'] },
-];
-
-const BONUS = [
-  { Icon:Home, title:'Premium Property Management',
-    description:'Facility managers can apply to manage entire properties — handling all bookings, cleaning, check-ins, maintenance, and guest communication for a monthly retainer.' },
-  { Icon:Star, title:'Earn the Elite Badge',
-    description:'Complete 50+ jobs with a 4.8+ rating to earn the Omonile Elite Professional badge — displayed on your profile and prioritised in all job assignments.' },
-];
-
-const FEES = [
-  { role:'Lawyer',           fee:'15% platform fee per case' },
-  { role:'Surveyor',         fee:'15% platform fee per inspection' },
-  { role:'Facility Manager', fee:'10% platform fee per booking managed' },
-  { role:'Community Leader', fee:'10% platform fee per engagement' },
-];
-
-const REQUIREMENTS = [
-  { role:'Lawyer',           reqs:'NBA licence, 2+ years experience, Lagos bar membership preferred' },
-  { role:'Surveyor',         reqs:'SURCON registration, GPS equipment, inspection vehicle' },
-  { role:'Facility Manager', reqs:'Clean record, smartphone with internet, Omonile training completion' },
-  { role:'Community Leader', reqs:'Verifiable community position, two references, government ID' },
+/* ── Updated Steps Data with Unsplash Images ── */
+const STEPS_CONFIG = [
+  { 
+    number: 1,
+    title: 'Choose Your Professional Role', 
+    image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&q=80',
+    imageAlt: 'Professional selecting role',
+    desc: 'Select whether you\'re applying as a Lawyer, Surveyor, Facility Manager, or Community Leader.',
+    bullets: [
+      'Lawyers: Must be licensed by the NBA',
+      'Surveyors: Must be registered with SURCON',
+      'Facility Managers: Training provided by Omonile',
+      'Community Leaders: Verifiable standing',
+    ],
+    tip: { icon: 'pro', text: 'Each role has specific earning potentials. Surveyors and Lawyers typically handle the high-tier verification requests.' }
+  },
+  { 
+    number: 2,
+    title: 'Submit Your Application', 
+    image: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=600&q=80',
+    imageAlt: 'Submitting online application',
+    desc: 'Complete the online application form (15–20 min). Upload your credentials and professional license.',
+    bullets: [
+      'Upload: Professional license, NIN, Bank details',
+      'References required for Lawyers/Surveyors',
+      'Processing time: 3–5 business days',
+    ],
+  },
+  { 
+    number: 3,
+    title: 'Complete Vetting & Verification', 
+    image: 'https://images.unsplash.com/photo-1521791055366-0d553872125f?w=600&q=80',
+    imageAlt: 'Identity verification process',
+    desc: 'Our team reviews your application and conducts a background check via official databases.',
+    bullets: [
+      'Background check within 3 working days',
+      'Virtual interview for specific tiers',
+      'Identity verified against NIN/BVN database',
+    ],
+  },
+  { 
+    number: 4,
+    title: 'Set Up Your Professional Profile', 
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80',
+    imageAlt: 'Editing professional profile dashboard',
+    desc: 'Build your profile with your photo, bio, and coverage areas to attract more job requests.',
+    bullets: [
+      'Set your operating LGAs and coverage area',
+      'List specializations and years of experience',
+      'Higher completeness = more job assignments',
+    ],
+  },
+  { 
+    number: 5,
+    title: 'Choose Your Subscription Plan', 
+    image: 'https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=600&q=80',
+    imageAlt: 'Subscription plan selection',
+    desc: 'Select a plan that matches your workload. Higher plans give access to priority placement.',
+    bullets: [
+      'Basic: ₦0 — up to 5 jobs/month',
+      'Professional: ₦10k/mo — 50 jobs + Badge',
+      'Enterprise: ₦100k/yr — Unlimited jobs',
+    ],
+    callout: {
+      title: 'SUBSCRIPTION PERKS:',
+      rows: [
+        { label: 'Verified Badge', desc: 'Increases trust by 40%' },
+        { label: 'Priority', desc: 'Appear first in local searches' },
+      ]
+    }
+  },
+  { 
+    number: 6,
+    title: 'Receive & Accept Job Requests', 
+    image: 'https://images.unsplash.com/photo-1512428559087-560ad5e8425d?w=600&q=80',
+    imageAlt: 'Notification on smartphone',
+    desc: 'Receive instant notifications when a property in your area needs your specific service.',
+    bullets: [
+      'Accept within 1 hour for high ratings',
+      'View location, type, and pay before accepting',
+      'Decline without penalty 3x per month',
+    ],
+  },
+  { 
+    number: 7,
+    title: 'Complete the Job & Submit Report', 
+    image: 'https://images.unsplash.com/photo-1503387762-592dea58ef23?w=600&q=80',
+    imageAlt: 'Field inspection and reporting',
+    desc: 'Carry out your professional duties and submit your digital report via the app.',
+    bullets: [
+      'Lawyers: 5 working days for title search',
+      'Surveyors: 2 working days after inspection',
+      'Include GPS data, photos & digital signature',
+    ],
+    timeline: [
+      { label: 'JOB ACCEPTED', detail: 'Day 1', done: true },
+      { label: 'FIELD/REGISTRY VISIT', detail: 'In Progress', done: true },
+      { label: 'DIGITAL REPORT UPLOAD', detail: 'Awaiting', done: false },
+      { label: 'QUALITY REVIEW', detail: 'Pending', done: false },
+    ]
+  },
+  { 
+    number: 8,
+    title: 'Get Paid & Build Reputation', 
+    image: 'https://images.unsplash.com/photo-1580519542036-c47de6196ba5?w=600&q=80',
+    imageAlt: 'Successful payment notification',
+    desc: 'Payment is released within 48 hours of approval. Ratings build your visibility.',
+    bullets: [
+      'Direct bank transfer — ₦5k min withdrawal',
+      'Ratings boost your profile visibility',
+      'Earn Elite Badge at 4.8+ rating',
+    ],
+  },
 ];
 
 export function ForProfessionalsSection() {
   return (
     <div>
-      {/* Header */}
-      <div style={{ marginBottom:'2.5rem' }}>
-        <div style={{ display:'inline-flex', alignItems:'center', gap:'7px', padding:'0.3rem 0.85rem', borderRadius:'9999px', background:C.colorBg, border:`1px solid ${C.colorBorder}`, marginBottom:'0.85rem' }}>
-          <Briefcase size={13} color={C.color} strokeWidth={2.2} />
-          <span style={{ fontFamily:'var(--font-body)', fontSize:'0.68rem', fontWeight:700, letterSpacing:'0.1em', textTransform:'uppercase', color:C.color }}>For Professionals</span>
+      {/* ── Header ── */}
+      <div style={{ marginBottom: '2.5rem' }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '7px', padding: '0.3rem 0.85rem', borderRadius: '9999px', background: B.brandBg, border: `1px solid ${B.brandBorder}`, marginBottom: '0.85rem' }}>
+          <Briefcase size={13} color={B.brand} strokeWidth={2.2} />
+          <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: B.brand }}>Professional Network</span>
         </div>
-        <h2 style={{ fontFamily:'var(--font-display)', fontWeight:800, fontSize:'clamp(1.5rem,3vw,2.1rem)', color:'var(--text-primary)', letterSpacing:'-0.025em', margin:'0 0 0.6rem', lineHeight:1.15 }}>
-          Join, verify, and earn.<br />Grow your professional practice with Omonile.
+        <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(1.5rem,3vw,2.1rem)', color: 'var(--text-primary)', letterSpacing: '-0.025em', margin: '0 0 0.6rem', lineHeight: 1.15 }}>
+          Join, verify, and earn.<br />Grow your practice with Omonile.
         </h2>
-        <p style={{ fontFamily:'var(--font-body)', fontSize:'0.95rem', color:'var(--text-muted)', maxWidth:'540px', lineHeight:1.7, margin:0 }}>
-          A step-by-step guide for lawyers, surveyors, facility managers, and community leaders to join and earn on Omonile App.
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.95rem', color: 'var(--text-muted)', maxWidth: '540px', lineHeight: 1.7, margin: 0 }}>
+          A complete professional ecosystem for Nigerian property experts to scale their services safely.
         </p>
       </div>
 
-      {/* Role cards */}
-      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(200px,1fr))', gap:'0.75rem', marginBottom:'2.5rem' }}>
-        {ROLES.map((r,i) => (
-          <div key={i} style={{ background:'var(--bg-surface)', border:`1px solid ${C.colorBorder}`, borderRadius:'14px', padding:'1.25rem' }}>
-            <div style={{ width:'40px', height:'40px', borderRadius:'10px', background:C.colorBg, border:`1px solid ${C.colorBorder}`, display:'flex', alignItems:'center', justifyContent:'center', marginBottom:'0.85rem' }}>
-              <r.Icon size={19} color={C.color} strokeWidth={1.8} />
+      {/* ── Trust Banner ── */}
+      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', padding: '1rem 1.25rem', background: B.brandBg, border: `1px solid ${B.brandBorder}`, borderRadius: '12px', marginBottom: '2.5rem' }}>
+        <UserCheck size={18} color={B.brand} strokeWidth={2} style={{ flexShrink: 0, marginTop: '1px' }} />
+        <div>
+          <p style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.82rem', color: B.brand, margin: '0 0 0.2rem', letterSpacing: '0.04em', textTransform: 'uppercase' }}>Verified Professional Status</p>
+          <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.55 }}>All professionals undergo strict vetting. Once approved, you gain access to high-value escrow-protected jobs.</p>
+        </div>
+      </div>
+
+      {/* ── Steps Rendering ── */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
+        {STEPS_CONFIG.map((step) => (
+          <div key={step.number}>
+            <div style={{
+              background: 'var(--bg-surface)',
+              border: '1px solid var(--border-subtle)',
+              borderRadius: '16px',
+              overflow: 'hidden',
+              boxShadow: 'var(--shadow-sm)',
+            }}>
+              {/* Step Header */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', padding: '1rem 1.25rem', borderBottom: '1px solid var(--border-subtle)', background: 'var(--bg-surface-2)' }}>
+                <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: B.brandBg, border: `1.5px solid ${B.brandBorder}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <span style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '0.82rem', color: B.brand }}>{step.number}</span>
+                </div>
+                <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.8rem', color: 'var(--text-primary)', margin: 0, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                  {step.title}
+                </h3>
+              </div>
+
+              {/* Main Content */}
+              <div className="step-inner" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0 }}>
+                {/* Left: Professional Photo */}
+                <div style={{ position: 'relative', minHeight: '220px', background: 'var(--bg-surface-2)', borderRight: '1px solid var(--border-subtle)' }}>
+                  <Image
+                    src={step.image}
+                    alt={step.imageAlt}
+                    fill
+                    sizes="(max-width:768px) 100vw, 50vw"
+                    style={{ objectFit: 'cover' }}
+                  />
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(26,107,60,0.2) 0%, transparent 60%)' }} />
+                </div>
+
+                {/* Right: Requirements/Action Bullets */}
+                <div style={{ padding: '1.25rem 1.5rem' }}>
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '1rem', lineHeight: 1.5 }}>
+                    {step.desc}
+                  </p>
+                  <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
+                    {step.bullets.map((b, i) => (
+                      <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+                        <CheckCircle2 size={14} color={B.brand} strokeWidth={2} style={{ flexShrink: 0, marginTop: '2px' }} />
+                        <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                          {b}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Pro Tip for Professionals */}
+              {step.tip && (
+                <div style={{ display: 'flex', gap: '9px', padding: '0.85rem 1.25rem', borderTop: '1px solid var(--border-subtle)', background: 'rgba(26,107,60,0.04)' }}>
+                  <Lightbulb size={15} color={B.brand} strokeWidth={2} style={{ flexShrink: 0, marginTop: '1px' }} />
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.82rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.55 }}>
+                    <span style={{ fontWeight: 700, color: B.brand }}>PROFESSIONAL TIP: </span>
+                    {step.tip.text}
+                  </p>
+                </div>
+              )}
+
+              {/* Callout/Timeline components (Step 5/7) */}
+              {step.callout && (
+                 <div style={{ borderTop: '1px solid var(--border-subtle)', padding: '1rem 1.25rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '7px', marginBottom: '0.75rem' }}>
+                    <Info size={13} color={B.brand} strokeWidth={2} />
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: B.brand }}>{step.callout.title}</span>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+                    {step.callout.rows.map((row, i) => (
+                      <div key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'baseline' }}>
+                        <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.78rem', fontWeight: 700, color: B.brand, flexShrink: 0, minWidth: '130px' }}>{row.label}</span>
+                        <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.82rem', color: 'var(--text-secondary)' }}>— {row.desc}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {step.timeline && (
+                <div style={{ borderTop: '1px solid var(--border-subtle)', padding: '1rem 1.25rem' }}>
+                   {step.timeline.map((t, i) => (
+                      <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.4rem' }}>
+                        <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: t.done ? B.brand : '#ddd' }} />
+                        <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', flex: 1, color: t.done ? 'var(--text-primary)' : 'var(--text-muted)' }}>{t.label}</span>
+                        <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.7rem', color: B.brand }}>{t.detail}</span>
+                      </div>
+                    ))}
+                </div>
+              )}
             </div>
-            <h4 style={{ fontFamily:'var(--font-display)', fontWeight:700, fontSize:'0.92rem', color:'var(--text-primary)', margin:'0 0 0.35rem', letterSpacing:'-0.01em' }}>{r.label}</h4>
-            <p style={{ fontFamily:'var(--font-body)', fontSize:'0.8rem', color:'var(--text-muted)', lineHeight:1.55, margin:'0 0 0.6rem' }}>{r.desc}</p>
-            <span style={{ fontFamily:'var(--font-body)', fontSize:'0.75rem', fontWeight:700, color:C.color }}>{r.pay}</span>
           </div>
         ))}
       </div>
 
-      {/* Steps */}
-      <div className="hiw-cols" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'0 3.5rem', marginBottom:'2.5rem' }}>
-        <div>{STEPS.slice(0,4).map((s,i) => <StepCard key={i} number={i+1} {...s} {...C} isLast={i===3} />)}</div>
-        <div>{STEPS.slice(4).map((s,i) => <StepCard key={i} number={i+5} {...s} {...C} isLast={i===3} />)}</div>
-      </div>
-
-      {/* Bonus */}
-      <div style={{ background:'var(--bg-surface)', border:'1px solid var(--border-subtle)', borderRadius:'16px', overflow:'hidden', marginBottom:'2rem' }}>
-        <div style={{ padding:'1rem 1.5rem', background:C.colorBg, borderBottom:`1px solid ${C.colorBorder}` }}>
-          <p style={{ fontFamily:'var(--font-body)', fontSize:'0.68rem', fontWeight:700, letterSpacing:'0.1em', textTransform:'uppercase', color:C.color, margin:'0 0 0.15rem' }}>Bonus</p>
-          <h4 style={{ fontFamily:'var(--font-display)', fontWeight:700, fontSize:'1rem', color:'var(--text-primary)', margin:0 }}>Facility Manager Premium Management</h4>
-        </div>
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(240px,1fr))', gap:'1px', background:'var(--border-subtle)' }}>
-          {BONUS.map((b,i) => (
-            <div key={i} style={{ background:'var(--bg-surface)', padding:'1.25rem 1.5rem' }}>
-              <div style={{ width:'36px', height:'36px', borderRadius:'9px', background:C.colorBg, border:`1px solid ${C.colorBorder}`, display:'flex', alignItems:'center', justifyContent:'center', marginBottom:'0.75rem' }}>
-                <b.Icon size={17} color={C.color} strokeWidth={1.8} />
+      {/* ── Payout/Fees Summary ── */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '1.5rem', marginTop: '3rem' }}>
+        <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-subtle)', borderRadius: '16px', padding: '1.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1rem' }}>
+            <CreditCard size={18} color={B.brand} />
+            <h4 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1rem', margin: 0 }}>Platform Fee Structure</h4>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            {[
+              { role: 'Lawyers', fee: '15% per verification' },
+              { role: 'Surveyors', fee: '15% per inspection' },
+              { role: 'Facility Managers', fee: '10% per booking' },
+              { role: 'Community Leaders', fee: '10% per case' },
+            ].map((f, i) => (
+              <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '0.5rem' }}>
+                <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{f.role}</span>
+                <span style={{ fontSize: '0.85rem', fontWeight: 700, color: B.brand }}>{f.fee}</span>
               </div>
-              <h5 style={{ fontFamily:'var(--font-display)', fontWeight:700, fontSize:'0.9rem', color:'var(--text-primary)', margin:'0 0 0.35rem' }}>{b.title}</h5>
-              <p style={{ fontFamily:'var(--font-body)', fontSize:'0.82rem', color:'var(--text-muted)', lineHeight:1.6, margin:0 }}>{b.description}</p>
-            </div>
-          ))}
+            ))}
+          </div>
+        </div>
+
+        <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-subtle)', borderRadius: '16px', padding: '1.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1rem' }}>
+            <Star size={18} color={B.accent} />
+            <h4 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1rem', margin: 0 }}>Reputation Benefits</h4>
+          </div>
+          <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+            Professionals with a rating of <strong>4.8+</strong> are automatically upgraded to <strong>Elite Status</strong>, appearing first in user searches and receiving priority job notifications.
+          </p>
         </div>
       </div>
 
-      {/* Fees + Requirements */}
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'1rem', marginBottom:'2rem' }} className="hiw-tables">
-        {/* Fees */}
-        <div style={{ background:'var(--bg-surface)', border:'1px solid var(--border-subtle)', borderRadius:'14px', overflow:'hidden' }}>
-          <div style={{ padding:'0.9rem 1.25rem', borderBottom:'1px solid var(--border-subtle)' }}>
-            <h4 style={{ fontFamily:'var(--font-display)', fontWeight:700, fontSize:'0.9rem', color:'var(--text-primary)', margin:0 }}>Platform Fees</h4>
-          </div>
-          {FEES.map((f,i) => (
-            <div key={i} style={{ display:'flex', justifyContent:'space-between', padding:'0.75rem 1.25rem', borderTop: i>0?'1px solid var(--border-subtle)':'none' }}>
-              <span style={{ fontFamily:'var(--font-body)', fontSize:'0.82rem', color:'var(--text-secondary)' }}>{f.role}</span>
-              <span style={{ fontFamily:'var(--font-display)', fontWeight:700, fontSize:'0.82rem', color:C.color }}>{f.fee}</span>
-            </div>
-          ))}
-        </div>
-
-        {/* Requirements */}
-        <div style={{ background:'var(--bg-surface)', border:'1px solid var(--border-subtle)', borderRadius:'14px', overflow:'hidden' }}>
-          <div style={{ padding:'0.9rem 1.25rem', borderBottom:'1px solid var(--border-subtle)' }}>
-            <h4 style={{ fontFamily:'var(--font-display)', fontWeight:700, fontSize:'0.9rem', color:'var(--text-primary)', margin:0 }}>Requirements</h4>
-          </div>
-          {REQUIREMENTS.map((r,i) => (
-            <div key={i} style={{ padding:'0.75rem 1.25rem', borderTop: i>0?'1px solid var(--border-subtle)':'none' }}>
-              <p style={{ fontFamily:'var(--font-display)', fontWeight:700, fontSize:'0.8rem', color:C.color, margin:'0 0 0.2rem' }}>{r.role}</p>
-              <p style={{ fontFamily:'var(--font-body)', fontSize:'0.78rem', color:'var(--text-muted)', margin:0, lineHeight:1.5 }}>{r.reqs}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* CTA */}
-      <div style={{ padding:'2rem 2.5rem', background:`linear-gradient(135deg, #3b1a7a, ${C.color})`, borderRadius:'16px', display:'flex', alignItems:'center', justifyContent:'space-between', flexWrap:'wrap', gap:'1.25rem' }}>
-        <div>
-          <h3 style={{ fontFamily:'var(--font-display)', fontWeight:700, fontSize:'1.15rem', color:'#fff', margin:'0 0 0.3rem', letterSpacing:'-0.02em' }}>Ready to grow your professional practice?</h3>
-          <p style={{ fontFamily:'var(--font-body)', fontSize:'0.875rem', color:'rgba(255,255,255,0.65)', margin:0 }}>Join Nigeria&apos;s fastest-growing property verification network.</p>
-        </div>
-        <Link href="/professionals/apply" style={{ display:'inline-flex', alignItems:'center', gap:'7px', padding:'0.85rem 1.75rem', borderRadius:'9999px', border:'1px solid #fff', background:'#fff', color:'#3b1a7a', fontFamily:'var(--font-body)', fontWeight:700, fontSize:'0.9rem', textDecoration:'none', flexShrink:0 }}>
-          Apply Now <ArrowRight size={16} strokeWidth={2.5} />
+      {/* ── CTA ── */}
+      <div style={{ marginTop: '3rem', padding: '2.5rem', background: `linear-gradient(135deg,#0d3d22,${B.brand})`, borderRadius: '16px', textAlign: 'center' }}>
+        <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.5rem', color: '#fff', marginBottom: '0.5rem' }}>Ready to grow your professional practice?</h3>
+        <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '1.5rem' }}>Join Nigeria&apos;s most trusted property verification network.</p>
+        <Link href="/professionals/apply" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', padding: '1rem 2rem', borderRadius: '9999px', background: B.accent, color: '#0d3d22', fontWeight: 700, textDecoration: 'none' }}>
+          Start Application <ArrowRight size={18} />
         </Link>
       </div>
 
       <style>{`
-        @media(max-width:700px){.hiw-cols,.hiw-tables{grid-template-columns:1fr!important}}
+        @media (max-width: 640px) {
+          .step-inner { grid-template-columns: 1fr !important; }
+          .step-inner > div:first-child { min-height: 180px !important; border-right: none !important; border-bottom: 1px solid var(--border-subtle); }
+        }
       `}</style>
     </div>
   );

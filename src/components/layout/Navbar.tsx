@@ -9,15 +9,16 @@ import { ThemeToggle } from './ui/ThemeToggle';
 const NAV_LINKS = [
   {
     label: 'How It Works',
-    href: 'how-it-works',
+    href: '/how-it-works',
     children: [
-      { label: 'For Buyers',     href: '/listings?type=land' },
-      { label: 'For Sellers', href: '/listings?type=property-sale' },
-      { label: 'For Renters', href: '/listings?type=short-let' },
-      { label: 'For Professionals',    href: '/listings?type=yearly-rent' },
+      { label: 'For Buyers',     href: '/how-it-works' },
+      { label: 'For Sellers', href: '/how-it-works' },
+      { label: 'For Renters', href: '/how-it-works' },
+      { label: 'For Professionals',    href: '/how-it-works' },
     ],
   },
   { label: 'Verify a Property', href: '/verify' },
+  { label: 'How-it-Works', href: '/how-it-works' },
   { label: 'Listings',     href: '/listings' },
   { label: 'About',             href: '/about' },
 ];

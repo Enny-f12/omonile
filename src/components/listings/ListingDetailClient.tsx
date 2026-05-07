@@ -56,7 +56,7 @@ const RESULT_COLOR: Record<string, string> = {
   Passed: '#1a6b3c', Clear: '#1a6b3c', Verified: '#1a6b3c', 'N/A': '#b8832a', Pending: '#dc2626',
 };
 
-export function ListingDetailClient({ id }: { id: string }) {
+export function ListingDetailClient({ }: { id: string }) {
   const [showReport, setShowReport] = useState(false);
   const [liked, setLiked]           = useState(false);
   const [activeImg, setActiveImg]   = useState(0);
