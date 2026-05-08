@@ -1,432 +1,262 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import {
+  ShieldCheck, Users, Building2, Star, BadgeCheck,
+  Scale, Wrench, Clock, Banknote, MapPin, Lock,
+  Zap, Heart, Globe, Award, CheckCircle2, ArrowRight, Quote,
+} from 'lucide-react';
 
-/* ─── TYPES ──────────────────────────────────────────────────────── */
-interface TeamMember {
-  name: string;
-  initials: string;
-  role: string;
-  bio: string;
-}
-
-interface Partner {
-  icon: string;
-  name: string;
-  description: string;
-  badge: string;
-  pending?: boolean;
-}
-
-
-
-/* ─── DATA ───────────────────────────────────────────────────────── */
-const team: TeamMember[] = [
+/* ─── DATA ──────────────────────────────────────────────────────── */
+const team = [
   {
-    name: 'Christian Ikenna',
-    initials: 'CI',
+    name: 'Christian Ikenna', initials: 'CI',
     role: 'CoFounder & CEO, Chrivon Tech Solutions',
     bio: 'Vision-led operator focused on scaling software products for African markets.',
+    gradient: 'linear-gradient(135deg,#1a6b3c 0%,#27ae60 100%)',
+    image: '/assets/founder/christian.jpeg',
   },
   {
-    name: 'B. Eugene Loko',
-    initials: 'BL',
+    name: 'B. Eugene Loko', initials: 'BL',
     role: 'CoFounder & Principal Data & Product Strategist',
     bio: "A cornerstone of Chrivon's pan-African brain trust with 19 years of experience.",
+    gradient: 'linear-gradient(135deg,#e8a84c 0%,#f2c06e 100%)',
+    image: '/assets/founder/Bonna.png',
   },
   {
-    name: 'Onaneye Joseph',
-    initials: 'OJ',
+    name: 'Onaneye Joseph', initials: 'OJ',
     role: 'Full-Stack Product Engineer & Tech Entrepreneur',
     bio: 'Full-stack developer focused on building scalable fintech and growth platforms.',
+    gradient: 'linear-gradient(135deg,#1a6b3c 0%,#e8a84c 100%)',
+    image: '/assets/founder/joseph.jpg',
   },
 ];
 
-const partners: Partner[] = [
-  { icon: '💳', name: 'Vetandpay', description: 'Escrow services ensuring secure transactions', badge: 'Active' },
-  { icon: '🏛️', name: 'Lagos State Government', description: 'Official state-level partnership for land data', badge: 'Pending', pending: true },
-  { icon: '⚖️', name: 'MARC', description: 'Alternative Dispute Resolution services', badge: 'ADR Partner' },
-  { icon: '🛡️', name: 'NDPC Compliant', description: 'Nigeria Data Protection Compliance certified', badge: 'Certified' },
+const stats = [
+  { Icon: Building2,  num: '2,400+', label: 'Properties Listed'   },
+  { Icon: BadgeCheck, num: '1,000+', label: 'Verified Properties' },
+  { Icon: Users,      num: '8,500+', label: 'Trusted Users'        },
+  { Icon: Star,       num: '4.9/5',  label: 'User Rating'          },
+];
+
+const values = [
+  { Icon: ShieldCheck, title: 'Trust First',        body: 'Every transaction is verified, every property authenticated, every payment secured.' },
+  { Icon: Zap,         title: 'Tech-Powered',       body: 'AI, blockchain, and professional networks working together for bulletproof verification.' },
+  { Icon: Heart,       title: 'People-Centric',     body: 'Built for everyday Nigerians who deserve safe and transparent property dealings.' },
+  { Icon: Globe,       title: 'Pan-African Vision', body: 'Starting in Nigeria, building toward a continent-wide property trust infrastructure.' },
+];
+
+const partners = [
+  { Icon: Lock,        name: 'Vetandpay',              desc: 'Escrow services ensuring secure transactions',     badge: 'Active',      pending: false },
+  { Icon: MapPin,      name: 'Lagos State Government', desc: 'Official state-level partnership for land data',   badge: 'Pending',     pending: true  },
+  { Icon: Scale,       name: 'MARC',                   desc: 'Alternative Dispute Resolution services',         badge: 'ADR Partner', pending: false },
+  { Icon: ShieldCheck, name: 'NDPC Compliant',          desc: 'Nigeria Data Protection Compliance certified',   badge: 'Certified',   pending: false },
 ];
 
 
 
-
-
-
-/* ─── SCROLL ANIMATION HOOK ──────────────────────────────────────── */
-function useReveal() {
-  const ref = useRef<HTMLDivElement>(null);
+/* ─── STYLE INJECTION ───────────────────────────────────────────── */
+function useStyles() {
+  const done = useRef(false);
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) el.style.animationPlayState = 'running'; },
-      { threshold: 0.12 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
+    if (done.current) return;
+    done.current = true;
+    const css = `
+      @keyframes ab-float { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-8px)} }
+      @keyframes ab-pulse  { 0%,100%{box-shadow:0 0 0 0 rgba(39,174,96,0.35)} 50%{box-shadow:0 0 0 7px rgba(39,174,96,0)} }
+
+      .ab-dot { display:inline-block; width:8px; height:8px; border-radius:50%; background:#27ae60; animation:ab-pulse 2s ease-in-out infinite; flex-shrink:0; }
+
+      .ab-section { padding:clamp(4rem,8vw,7rem) clamp(1.25rem,5vw,3rem); }
+      .ab-inner   { max-width:1180px; margin:0 auto; }
+
+      .ab-label { display:inline-flex; align-items:center; gap:0.5rem; font-family:var(--font-body); font-size:0.7rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#1a6b3c; margin-bottom:0.85rem; }
+      .ab-label::before { content:''; display:block; width:18px; height:2px; border-radius:2px; background:#e8a84c; }
+      .ab-label-light { color:#e8a84c; }
+      .ab-grad { background:linear-gradient(135deg,#1a6b3c 0%,#e8a84c 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+
+      /* HERO */
+      .ab-hero {
+        position:relative; overflow:hidden;
+        padding:clamp(6rem,12vw,9rem) clamp(1.25rem,5vw,3rem) clamp(4rem,8vw,6rem);
+        background: radial-gradient(ellipse 70% 55% at 60% 30%,rgba(26,107,60,0.09) 0%,transparent 65%), radial-gradient(ellipse 45% 40% at 5% 85%,rgba(232,168,76,0.07) 0%,transparent 55%), var(--bg-base);
+        border-bottom:1px solid var(--border-subtle);
+      }
+      .ab-hero::after { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background:linear-gradient(90deg,transparent,#e8a84c 40%,#1a6b3c 100%); }
+      .ab-hero-grid { max-width:1180px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; }
+      .ab-hero-badge { display:inline-flex; align-items:center; gap:0.5rem; background:rgba(26,107,60,0.1); border:1px solid rgba(26,107,60,0.18); color:#1a6b3c; font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:0.35rem 0.9rem; border-radius:9999px; margin-bottom:1.25rem; }
+      .ab-hero-title { font-family:var(--font-display); font-size:clamp(2.2rem,5vw,3.6rem); font-weight:900; line-height:1.06; letter-spacing:-0.03em; color:var(--text-primary); margin:0 0 1.25rem; }
+      .ab-hero-desc  { font-size:1.05rem; color:var(--text-secondary); line-height:1.75; max-width:480px; margin:0 0 2rem; }
+      .ab-hero-btns  { display:flex; gap:0.85rem; flex-wrap:wrap; }
+
+      /* Floating card */
+      .ab-card-stack { position:relative; width:280px; height:300px; margin:auto; }
+      .ab-fcard { position:absolute; background:var(--bg-surface); border-radius:20px; box-shadow:var(--shadow-lg); border:1px solid var(--border-subtle); padding:1.5rem; width:220px; }
+      .ab-fcard-main { top:0; left:50%; z-index:3; animation:ab-float 5s ease-in-out infinite; }
+      .ab-fcard-b1   { top:20px; left:5px; z-index:2; opacity:0.45; transform:rotate(-5deg); }
+      .ab-fcard-b2   { top:28px; right:0;  z-index:1; opacity:0.28; transform:rotate(6deg); }
+      .ab-fcard-icon { width:40px; height:40px; border-radius:10px; margin-bottom:0.8rem; background:linear-gradient(135deg,#1a6b3c,#e8a84c); display:flex; align-items:center; justify-content:center; color:white; }
+
+      /* STATS */
+      .ab-stats { background:#1a6b3c; padding:2.5rem clamp(1.25rem,5vw,3rem); }
+      .ab-stats-grid { max-width:1180px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; text-align:center; }
+      .ab-stat-icon { display:flex; justify-content:center; margin-bottom:0.4rem; color:rgba(255,255,255,0.5); }
+      .ab-stat-num  { font-family:var(--font-display); font-size:clamp(1.8rem,3.5vw,2.4rem); font-weight:900; color:#e8a84c; line-height:1; margin-bottom:0.3rem; }
+      .ab-stat-lbl  { font-size:0.78rem; color:rgba(255,255,255,0.65); text-transform:uppercase; letter-spacing:0.08em; }
+
+      /* STORY */
+      .ab-story-grid { display:grid; grid-template-columns:1fr 1fr; gap:clamp(2.5rem,5vw,5rem); align-items:center; }
+      .ab-story-visual { border-radius:24px; overflow:hidden; position:relative; background:linear-gradient(135deg,var(--bg-surface-2),var(--bg-surface-3)); aspect-ratio:4/3; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; color:var(--text-muted); border:1px solid var(--border-subtle); }
+      .ab-story-accent { position:absolute; bottom:-1.25rem; right:-1.25rem; background:#e8a84c; border-radius:12px; padding:1rem 1.25rem; box-shadow:var(--shadow-md); z-index:2; }
+      .ab-story-title { font-family:var(--font-display); font-size:clamp(1.8rem,3.5vw,2.4rem); font-weight:800; color:var(--text-primary); margin:0 0 1.25rem; letter-spacing:-0.02em; }
+      .ab-story-body  { font-size:1rem; color:var(--text-secondary); line-height:1.8; }
+      .ab-story-body p+p { margin-top:1rem; }
+      .ab-quote { margin-top:2rem; padding:1.25rem 1.5rem; background:rgba(26,107,60,0.07); border-left:3px solid #1a6b3c; border-radius:0 12px 12px 0; display:flex; gap:0.75rem; align-items:flex-start; }
+      .ab-quote-icon { color:#1a6b3c; flex-shrink:0; margin-top:2px; }
+      .ab-quote-text { font-style:italic; font-size:0.97rem; color:var(--text-secondary); line-height:1.7; }
+
+      /* VALUES */
+      .ab-values-bg { background:var(--bg-surface-2); border-top:1px solid var(--border-subtle); border-bottom:1px solid var(--border-subtle); }
+      .ab-values-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.25rem; margin-top:2.5rem; }
+      .ab-val-card { background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:20px; padding:1.75rem 1.5rem; transition:transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease; }
+      .ab-val-card:hover { transform:translateY(-5px); box-shadow:var(--shadow-md); border-color:rgba(26,107,60,0.2); }
+      .ab-val-icon { width:46px; height:46px; border-radius:12px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; background:rgba(26,107,60,0.1); color:#1a6b3c; transition:background 250ms, color 250ms; }
+      .ab-val-card:hover .ab-val-icon { background:#1a6b3c; color:#fff; }
+      .ab-val-title { font-family:var(--font-display); font-size:0.97rem; font-weight:700; color:var(--text-primary); margin:0 0 0.5rem; }
+      .ab-val-body  { font-size:0.85rem; color:var(--text-muted); line-height:1.65; margin:0; }
+
+      /* TEAM */
+      .ab-team-hd   { text-align:center; margin-bottom:3.5rem; }
+      .ab-team-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
+      .ab-team-card { background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:24px; overflow:hidden; transition:transform 260ms ease, box-shadow 260ms ease; }
+      .ab-team-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); }
+      .ab-team-img  { aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; background:linear-gradient(135deg,var(--bg-surface-2),var(--bg-surface-3)); }
+      .ab-team-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(15,28,20,0.55) 0%,transparent 50%); opacity:0; transition:opacity 250ms ease; }
+      .ab-team-card:hover .ab-team-overlay { opacity:1; }
+      .ab-avatar { width:80px; height:80px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:1.75rem; font-weight:900; color:#fff; position:relative; z-index:1; }
+      .ab-team-body { padding:1.5rem; }
+      .ab-team-name { font-family:var(--font-display); font-size:1.05rem; font-weight:700; color:var(--text-primary); margin:0 0 0.25rem; }
+      .ab-team-role { font-size:0.75rem; color:#1a6b3c; font-weight:600; text-transform:uppercase; letter-spacing:0.06em; margin:0 0 0.75rem; }
+      .ab-team-bio  { font-size:0.875rem; color:var(--text-muted); line-height:1.6; margin:0; }
+
+      /* PARTNERS */
+      .ab-partners-bg { background:#1a6b3c; position:relative; overflow:hidden; }
+      .ab-partners-bg::before { content:''; position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse 60% 50% at 80% 50%,rgba(232,168,76,0.12) 0%,transparent 60%); }
+      .ab-partners-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.25rem; }
+      .ab-partner-card { background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); border-radius:20px; padding:1.75rem 1.5rem; text-align:center; transition:background 220ms, border-color 220ms, transform 220ms; }
+      .ab-partner-card:hover { background:rgba(255,255,255,0.14); border-color:rgba(255,255,255,0.25); transform:translateY(-4px); }
+      .ab-partner-icon { width:50px; height:50px; border-radius:12px; background:rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:center; margin:0 auto 1rem; color:white; }
+      .ab-partner-name { font-family:var(--font-display); font-size:0.95rem; font-weight:700; color:white; margin:0 0 0.35rem; }
+      .ab-partner-desc { font-size:0.8rem; color:rgba(255,255,255,0.55); margin:0 0 0.6rem; line-height:1.5; }
+      .ab-partner-badge { display:inline-block; font-size:0.68rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:0.2rem 0.6rem; border-radius:9999px; background:rgba(232,168,76,0.25); color:#e8a84c; border:1px solid rgba(232,168,76,0.3); }
+      .ab-partner-badge-pending { background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.45); border-color:rgba(255,255,255,0.15); }
+
+      /* TRUST */
+      .ab-trust-bg   { background:var(--bg-surface); }
+      .ab-trust-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
+      .ab-trust-items { display:flex; flex-direction:column; gap:0.85rem; }
+      .ab-trust-item { display:flex; align-items:flex-start; gap:1rem; padding:1rem 1.1rem; border-radius:12px; border:1px solid var(--border-subtle); transition:border-color 180ms, background 180ms; }
+      .ab-trust-item:hover { border-color:rgba(26,107,60,0.25); background:rgba(26,107,60,0.03); }
+      .ab-trust-ico { width:34px; height:34px; border-radius:8px; flex-shrink:0; background:rgba(26,107,60,0.1); color:#1a6b3c; display:flex; align-items:center; justify-content:center; }
+      .ab-trust-visual { background:linear-gradient(135deg,var(--bg-surface-2),var(--bg-surface-3)); border-radius:24px; padding:2.5rem; border:1px solid var(--border-subtle); position:relative; overflow:hidden; }
+      .ab-trust-visual::before { content:''; position:absolute; top:-40px; right:-40px; width:180px; height:180px; border-radius:50%; background:radial-gradient(circle,rgba(26,107,60,0.08),transparent 70%); }
+      .ab-shield-big { width:72px; height:72px; border-radius:20px; margin:0 auto 1.5rem; background:linear-gradient(135deg,#1a6b3c,#e8a84c); display:flex; align-items:center; justify-content:center; color:white; box-shadow:0 8px 28px rgba(26,107,60,0.3); }
+      .ab-trust-feats { display:flex; flex-direction:column; gap:0.85rem; }
+      .ab-trust-feat  { display:flex; align-items:center; gap:0.75rem; }
+      .ab-feat-check  { width:26px; height:26px; border-radius:50%; flex-shrink:0; background:rgba(26,107,60,0.12); color:#1a6b3c; display:flex; align-items:center; justify-content:center; }
+
+      /* CTA */
+      .ab-cta-wrap { padding:clamp(4rem,8vw,7rem) clamp(1.25rem,5vw,3rem); background:var(--bg-base); }
+      .ab-cta-card { max-width:900px; margin:0 auto; position:relative; overflow:hidden; border-radius:32px; padding:clamp(3rem,6vw,5rem) clamp(2rem,5vw,4rem); text-align:center; background:linear-gradient(135deg,#1a6b3c 0%,#22883f 100%); }
+      .ab-cta-card::before { content:''; position:absolute; top:-60px; right:-60px; width:260px; height:260px; border-radius:50%; background:rgba(255,255,255,0.05); }
+      .ab-cta-card::after  { content:''; position:absolute; bottom:-80px; left:-40px; width:200px; height:200px; border-radius:50%; background:rgba(232,168,76,0.12); }
+      .ab-cta-inner   { position:relative; z-index:1; }
+      .ab-cta-actions { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+
+      /* BUTTONS */
+      .ab-btn-primary { font-family:var(--font-body); font-weight:600; font-size:0.9rem; background:#1a6b3c; color:#fff; padding:0.78rem 1.8rem; border-radius:9999px; border:none; cursor:pointer; transition:background 220ms, transform 220ms; box-shadow:0 2px 10px rgba(26,107,60,0.25); display:inline-flex; align-items:center; gap:0.5rem; text-decoration:none; }
+      .ab-btn-primary:hover { background:#22883f; transform:translateY(-1px); }
+      .ab-btn-ghost   { font-family:var(--font-body); font-weight:600; font-size:0.9rem; background:transparent; color:var(--text-secondary); padding:0.78rem 1.8rem; border-radius:9999px; border:1.5px solid var(--border-default); cursor:pointer; transition:all 220ms; display:inline-flex; align-items:center; gap:0.5rem; text-decoration:none; }
+      .ab-btn-ghost:hover   { border-color:#1a6b3c; color:#1a6b3c; }
+      .ab-btn-gold    { font-family:var(--font-body); font-weight:700; font-size:0.9rem; background:#e8a84c; color:#0f1c14; padding:0.78rem 1.8rem; border-radius:9999px; border:none; cursor:pointer; transition:all 220ms; display:inline-flex; align-items:center; gap:0.5rem; text-decoration:none; box-shadow:0 4px 16px rgba(232,168,76,0.4); }
+      .ab-btn-gold:hover    { background:#f2c06e; transform:translateY(-2px); }
+      .ab-btn-white   { font-family:var(--font-body); font-weight:600; font-size:0.9rem; background:transparent; color:#fff; padding:0.78rem 1.8rem; border-radius:9999px; border:1.5px solid rgba(255,255,255,0.4); cursor:pointer; transition:all 220ms; display:inline-flex; align-items:center; gap:0.5rem; text-decoration:none; }
+      .ab-btn-white:hover   { background:rgba(255,255,255,0.12); border-color:rgba(255,255,255,0.7); }
+
+      /* RESPONSIVE */
+      @media(max-width:960px){
+        .ab-hero-grid, .ab-story-grid, .ab-trust-grid { grid-template-columns:1fr; }
+        .ab-hero-visual { display:none; }
+        .ab-values-grid { grid-template-columns:repeat(2,1fr); }
+        .ab-partners-grid { grid-template-columns:repeat(2,1fr); }
+        .ab-team-grid { grid-template-columns:repeat(2,1fr); }
+        .ab-stats-grid { grid-template-columns:repeat(2,1fr); }
+        .ab-trust-grid { gap:2.5rem; }
+        .ab-story-accent { right:0; bottom:-1rem; }
+      }
+      @media(max-width:600px){
+        .ab-values-grid { grid-template-columns:1fr; }
+        .ab-team-grid   { grid-template-columns:1fr; }
+        .ab-partners-grid { grid-template-columns:1fr 1fr; }
+        .ab-stats-grid  { grid-template-columns:1fr 1fr; }
+        .ab-hero-btns   { flex-direction:column; }
+        .ab-cta-actions { flex-direction:column; align-items:center; }
+      }
+    `;
+    const el = document.createElement('style');
+    el.setAttribute('data-about', '1');
+    el.textContent = css;
+    document.head.appendChild(el);
   }, []);
-  return ref;
 }
 
-/* ─── SMALL SHARED COMPONENTS ────────────────────────────────────── */
-function SectionLabel({ children, light }: { children: React.ReactNode; light?: boolean }) {
-  return (
-    <span style={{
-      display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-      fontFamily: 'var(--font-body)', fontSize: '0.7rem', fontWeight: 700,
-      letterSpacing: '0.14em', textTransform: 'uppercase',
-      color: light ? 'var(--brand-accent)' : 'var(--brand-primary)',
-      marginBottom: '0.85rem',
-    }}>
-      <span style={{ display: 'block', width: 20, height: 2, background: light ? 'rgba(255,255,255,0.3)' : 'var(--brand-accent)', borderRadius: 2 }} />
-      {children}
-    </span>
-  );
-}
-
-
-/* ─── PAGE ───────────────────────────────────────────────────────── */
+/* ═══════════════════════════ PAGE ══════════════════════════════════ */
 export default function AboutPage() {
-  /* reveal refs */
-  const heroRef    = useReveal();
-  const storyVRef  = useReveal();
-  const storyCRef  = useReveal();
-  const teamRef    = useReveal();
-  const partnersRef= useReveal();
+  useStyles();
 
   return (
     <>
-      {/* ── GLOBAL STYLES ─────────────────────────────────── */}
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap');
+      {/* ══ HERO ═══════════════════════════════════════════════════ */}
+      <section className="ab-hero">
+        <div className="ab-hero-grid">
 
-        :root {
-          --brand-primary:       #1a6b3c;
-          --brand-primary-light: #22883f;
-          --brand-accent:        #e8a84c;
-          --brand-accent-light:  #f2c06e;
-          --brand-success:       #27ae60;
-          --bg-base:      #f8f6f1;
-          --bg-surface:   #ffffff;
-          --bg-surface-2: #f0ede6;
-          --bg-surface-3: #e8e4db;
-          --bg-overlay:   rgba(255,255,255,0.85);
-          --text-primary:   #0f1c14;
-          --text-secondary: #3d5045;
-          --text-muted:     #7a8f7e;
-          --border-subtle:  #ddd8ce;
-          --border-default: #c8c2b6;
-          --border-strong:  #9e9588;
-          --shadow-sm: 0 1px 3px rgba(15,28,20,0.08);
-          --shadow-md: 0 4px 16px rgba(15,28,20,0.10);
-          --shadow-lg: 0 12px 40px rgba(15,28,20,0.14);
-          --radius-sm: 6px; --radius-md: 12px; --radius-lg: 20px;
-          --radius-xl: 32px; --radius-full: 9999px;
-          --font-display: 'Montserrat', sans-serif;
-          --font-body:    'DM Sans', sans-serif;
-          --t-fast: 150ms cubic-bezier(0.4,0,0.2,1);
-          --t-base: 250ms cubic-bezier(0.4,0,0.2,1);
-        }
-
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
-        body {
-          font-family: var(--font-body);
-          background: var(--bg-base);
-          color: var(--text-primary);
-          line-height: 1.6;
-        }
-        h1,h2,h3,h4,h5,h6 {
-          font-family: var(--font-display);
-          line-height: 1.15;
-          letter-spacing: -0.02em;
-          color: var(--text-primary);
-        }
-        img { display: block; max-width: 100%; }
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: var(--bg-surface-2); }
-        ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 999px; }
-        ::selection { background: rgba(26,107,60,0.18); color: var(--text-primary); }
-
-        /* animations */
-        @keyframes fadeUp  { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:none; } }
-        @keyframes scaleIn { from { opacity:0; transform:scale(0.94); }      to { opacity:1; transform:none; } }
-        @keyframes floatY  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-        @keyframes pulseGlow {
-          0%,100% { box-shadow: 0 0 0 0 rgba(26,107,60,0.3); }
-          50%      { box-shadow: 0 0 0 8px rgba(26,107,60,0); }
-        }
-
-        .anim-fade-up  { animation: fadeUp  0.6s ease both; animation-play-state: paused; }
-        .anim-scale-in { animation: scaleIn 0.4s ease both; animation-play-state: paused; }
-        .d1 { animation-delay: 100ms; }
-        .d2 { animation-delay: 200ms; }
-        .d3 { animation-delay: 300ms; }
-        .d4 { animation-delay: 400ms; }
-        .d5 { animation-delay: 500ms; }
-
-        .pulse-dot {
-          display: inline-block; width: 8px; height: 8px;
-          background: var(--brand-success); border-radius: 50%;
-          animation: pulseGlow 2s ease-in-out infinite;
-        }
-        .gradient-text {
-          background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-accent) 100%);
-          -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-        }
-
-        /* section wrapper */
-        .section { padding: clamp(4rem,8vw,7rem) clamp(1.25rem,5vw,3rem); }
-        .inner   { max-width: 1180px; margin: 0 auto; }
-
-        /* buttons */
-        .btn-primary {
-          font-family: var(--font-body); font-weight: 600; font-size: .9rem;
-          background: var(--brand-primary); color: #fff;
-          padding: .75rem 1.75rem; border-radius: var(--radius-full);
-          border: none; cursor: pointer; transition: all var(--t-base);
-          box-shadow: 0 2px 8px rgba(26,107,60,.25);
-        }
-        .btn-primary:hover { background: var(--brand-primary-light); transform: translateY(-1px); }
-        .btn-ghost {
-          font-family: var(--font-body); font-weight: 600; font-size: .9rem;
-          background: transparent; color: var(--text-secondary);
-          padding: .75rem 1.75rem; border-radius: var(--radius-full);
-          border: 1.5px solid var(--border-default); cursor: pointer; transition: all var(--t-base);
-        }
-        .btn-ghost:hover { border-color: var(--brand-primary); color: var(--brand-primary); background: rgba(26,107,60,.04); }
-        .btn-accent {
-          font-family: var(--font-body); font-weight: 700; font-size: .9rem;
-          background: var(--brand-accent); color: var(--text-primary);
-          padding: .75rem 1.75rem; border-radius: var(--radius-full);
-          border: none; cursor: pointer; transition: all var(--t-base);
-          box-shadow: 0 4px 16px rgba(232,168,76,.35);
-        }
-        .btn-accent:hover { background: var(--brand-accent-light); transform: translateY(-2px); }
-        .btn-outline-white {
-          font-family: var(--font-body); font-weight: 600; font-size: .9rem;
-          background: transparent; color: #fff;
-          padding: .75rem 1.75rem; border-radius: var(--radius-full);
-          border: 1.5px solid rgba(255,255,255,.4); cursor: pointer; transition: all var(--t-base);
-        }
-        .btn-outline-white:hover { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.7); }
-
-        /* ── HERO ── */
-        .hero {
-          position: relative; overflow: hidden;
-          padding: clamp(5rem,12vw,9rem) clamp(1.25rem,5vw,3rem) clamp(4rem,8vw,7rem);
-          background:
-            radial-gradient(ellipse 70% 60% at 65% 30%, rgba(26,107,60,.09) 0%, transparent 70%),
-            radial-gradient(ellipse 50% 40% at 10% 80%, rgba(232,168,76,.07) 0%, transparent 60%),
-            var(--bg-base);
-        }
-        .hero::after {
-          content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
-          background: linear-gradient(90deg, transparent 0%, var(--brand-accent) 40%, var(--brand-primary) 100%);
-        }
-        .hero-deco-ring {
-          position:absolute; border-radius:50%; border:1px solid rgba(26,107,60,.1);
-        }
-        .hero-deco-dot {
-          position:absolute; border-radius:50%; background:var(--brand-accent);
-          opacity:.15; animation: floatY 6s ease-in-out infinite;
-        }
-        .hero-inner { max-width:1180px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; }
-        .hero-badge {
-          display:inline-flex; align-items:center; gap:.5rem;
-          background:rgba(26,107,60,.08); border:1px solid rgba(26,107,60,.15);
-          color:var(--brand-primary); font-size:.75rem; font-weight:700;
-          letter-spacing:.1em; text-transform:uppercase;
-          padding:.35rem .9rem; border-radius:var(--radius-full); margin-bottom:1.25rem;
-        }
-        .hero-title { font-size:clamp(2.4rem,5vw,3.6rem); font-weight:900; line-height:1.05; margin-bottom:1.25rem; }
-        .hero-desc  { font-size:1.05rem; color:var(--text-secondary); line-height:1.75; max-width:480px; margin-bottom:2rem; }
-        .hero-actions { display:flex; gap:1rem; flex-wrap:wrap; }
-
-        /* floating card */
-        .card-stack { position:relative; width:320px; height:340px; }
-        .h-card {
-          position:absolute; background:var(--bg-surface);
-          border-radius:var(--radius-lg); box-shadow:var(--shadow-lg);
-          border:1px solid var(--border-subtle); padding:1.5rem; width:240px;
-        }
-        .h-card-main { top:0; left:50%; transform:translateX(-50%); z-index:3; animation:floatY 5s ease-in-out infinite; }
-        .h-card-b1   { top:20px; left:10px; z-index:2; opacity:.6; transform:rotate(-5deg); }
-        .h-card-b2   { top:30px; right:0;   z-index:1; opacity:.35; transform:rotate(6deg); }
-        .h-card-icon {
-          width:42px; height:42px; border-radius:var(--radius-md); margin-bottom:.85rem;
-          background:linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-accent) 100%);
-          display:grid; place-items:center;
-        }
-        .h-card-verified { display:inline-flex; align-items:center; gap:.4rem; font-size:.72rem; font-weight:600; color:var(--brand-success); margin-top:.75rem; }
-
-        /* ── STATS ── */
-        .stats-bar { background:var(--brand-primary); padding:2.5rem clamp(1.25rem,5vw,3rem); }
-        .stats-inner { max-width:1180px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; text-align:center; }
-        .stat-num { font-family:var(--font-display); font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:900; color:#fff; line-height:1; margin-bottom:.35rem; }
-        .stat-accent { color:var(--brand-accent); }
-        .stat-lbl { font-size:.8rem; color:rgba(255,255,255,.65); text-transform:uppercase; letter-spacing:.08em; font-weight:500; }
-
-        /* ── STORY ── */
-        .story-grid { display:grid; grid-template-columns:1fr 1fr; gap:clamp(2rem,5vw,5rem); align-items:center; }
-        .story-frame {
-          border-radius:var(--radius-xl); aspect-ratio:4/3; overflow:hidden;
-          background:linear-gradient(135deg, var(--bg-surface-2) 0%, var(--bg-surface-3) 100%);
-          display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; color:var(--text-muted);
-        }
-        .story-accent {
-          position:absolute; bottom:-1.5rem; right:-1.5rem;
-          background:var(--brand-accent); border-radius:var(--radius-md);
-          padding:1rem 1.25rem; box-shadow:var(--shadow-md); min-width:160px;
-        }
-        .story-title { font-size:clamp(1.8rem,3.5vw,2.5rem); font-weight:800; margin-bottom:1.25rem; }
-        .story-body  { font-size:1rem; color:var(--text-secondary); line-height:1.8; }
-        .story-body p+p { margin-top:1rem; }
-        .story-quote {
-          margin-top:2rem; padding:1.25rem 1.5rem;
-          background:rgba(26,107,60,.06); border-left:3px solid var(--brand-primary);
-          border-radius:0 var(--radius-md) var(--radius-md) 0;
-          font-style:italic; font-size:1rem; color:var(--text-secondary); line-height:1.7;
-        }
-
-        /* ── MISSION ── */
-        .mission-section { background:var(--bg-surface-2); border-top:1px solid var(--border-subtle); border-bottom:1px solid var(--border-subtle); }
-        .mission-grid { display:grid; grid-template-columns:1fr 2fr; gap:4rem; align-items:start; }
-        .mission-stmt { font-size:clamp(1.1rem,2.2vw,1.4rem); color:var(--text-secondary); line-height:1.7; font-weight:300; font-style:italic; }
-
-        /* ── VALUES ── */
-        .values-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.25rem; margin-top:2.5rem; }
-        .val-card {
-          background:var(--bg-surface); border:1px solid var(--border-subtle);
-          border-radius:var(--radius-lg); padding:1.75rem 1.5rem;
-          transition:all var(--t-base); cursor:default; position:relative; overflow:hidden;
-        }
-        .val-card::before { content:''; position:absolute; inset:0; opacity:0; background:linear-gradient(135deg,rgba(26,107,60,.04) 0%,rgba(232,168,76,.03) 100%); transition:opacity var(--t-base); }
-        .val-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-md); border-color:rgba(26,107,60,.2); }
-        .val-card:hover::before { opacity:1; }
-        .val-icon { width:48px; height:48px; border-radius:var(--radius-md); display:grid; place-items:center; margin-bottom:1.1rem; background:rgba(26,107,60,.1); font-size:1.4rem; transition:all var(--t-base); }
-        .val-card:hover .val-icon { background:var(--brand-primary); }
-
-        /* ── TEAM ── */
-        .team-header { text-align:center; margin-bottom:3.5rem; }
-        .team-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
-        .team-card { background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--radius-xl); overflow:hidden; transition:all var(--t-base); }
-        .team-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); }
-        .team-img { aspect-ratio:1/1; background:linear-gradient(135deg, var(--bg-surface-2) 0%, var(--bg-surface-3) 100%); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
-        .team-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(15,28,20,.7) 0%,transparent 50%); opacity:0; transition:opacity var(--t-base); }
-        .team-card:hover .team-overlay { opacity:1; }
-        .avatar { width:80px; height:80px; border-radius:50%; background:linear-gradient(135deg,var(--brand-primary) 0%,var(--brand-accent) 100%); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:1.8rem; font-weight:900; color:#fff; }
-        .team-body { padding:1.5rem; }
-        .team-name { font-size:1.05rem; font-weight:700; margin-bottom:.25rem; }
-        .team-role { font-size:.78rem; color:var(--brand-primary); font-weight:600; text-transform:uppercase; letter-spacing:.06em; margin-bottom:.75rem; }
-        .team-bio  { font-size:.875rem; color:var(--text-muted); line-height:1.6; }
-
-        /* ── PARTNERS ── */
-        .partners-section { background:var(--brand-primary); overflow:hidden; position:relative; }
-        .partners-section::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 50% at 80% 50%,rgba(232,168,76,.12) 0%,transparent 60%); pointer-events:none; }
-        .partners-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.25rem; }
-        .partner-card { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12); border-radius:var(--radius-lg); padding:1.75rem 1.5rem; text-align:center; transition:all var(--t-base); }
-        .partner-card:hover { background:rgba(255,255,255,.14); border-color:rgba(255,255,255,.25); transform:translateY(-4px); }
-        .partner-icon { width:52px; height:52px; border-radius:var(--radius-md); background:rgba(255,255,255,.12); display:grid; place-items:center; margin:0 auto 1rem; font-size:1.5rem; }
-        .partner-badge { display:inline-block; margin-top:.6rem; font-size:.68rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.2rem .6rem; border-radius:var(--radius-full); background:rgba(232,168,76,.25); color:var(--brand-accent); border:1px solid rgba(232,168,76,.3); }
-        .partner-badge-pending { background:rgba(255,255,255,.1); color:rgba(255,255,255,.5); border-color:rgba(255,255,255,.15); }
-
-        /* ── TRUST ── */
-        .trust-section { background:var(--bg-surface); }
-        .trust-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
-        .trust-items { display:flex; flex-direction:column; gap:1rem; }
-        .trust-item { display:flex; align-items:flex-start; gap:1rem; padding:1rem; border-radius:var(--radius-md); border:1px solid var(--border-subtle); transition:all var(--t-fast); }
-        .trust-item:hover { border-color:rgba(26,107,60,.25); background:rgba(26,107,60,.03); }
-        .trust-icon { width:36px; height:36px; border-radius:var(--radius-sm); background:rgba(26,107,60,.1); color:var(--brand-primary); display:grid; place-items:center; flex-shrink:0; }
-        .trust-visual { background:linear-gradient(135deg,var(--bg-surface-2) 0%,var(--bg-surface-3) 100%); border-radius:var(--radius-xl); padding:2.5rem; border:1px solid var(--border-subtle); position:relative; overflow:hidden; }
-        .trust-visual::before { content:''; position:absolute; top:-40px; right:-40px; width:200px; height:200px; border-radius:50%; background:radial-gradient(circle,rgba(26,107,60,.08) 0%,transparent 70%); }
-        .trust-feats { display:flex; flex-direction:column; gap:1.25rem; }
-        .trust-feat { display:flex; align-items:center; gap:1rem; }
-        .feat-check { width:32px; height:32px; border-radius:50%; background:rgba(26,107,60,.12); color:var(--brand-primary); display:grid; place-items:center; flex-shrink:0; }
-
-        /* ── CTA ── */
-        .cta-section { background:var(--bg-base); padding:clamp(4rem,8vw,7rem) clamp(1.25rem,5vw,3rem); }
-        .cta-card { max-width:900px; margin:0 auto; background:linear-gradient(135deg,var(--brand-primary) 0%,var(--brand-primary-light) 100%); border-radius:var(--radius-xl); padding:clamp(3rem,6vw,5rem) clamp(2rem,5vw,4rem); text-align:center; position:relative; overflow:hidden; }
-        .cta-card::before { content:''; position:absolute; top:-60px; right:-60px; width:280px; height:280px; border-radius:50%; background:rgba(255,255,255,.05); }
-        .cta-card::after  { content:''; position:absolute; bottom:-80px; left:-40px; width:200px; height:200px; border-radius:50%; background:rgba(232,168,76,.12); }
-        .cta-inner { position:relative; z-index:1; }
-        .cta-actions { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
-
-        /* ── RESPONSIVE ── */
-        @media(max-width:900px){
-          .hero-inner,.story-grid,.trust-grid,.mission-grid{grid-template-columns:1fr;}
-          .hero-visual-col{display:none;}
-          .values-grid{grid-template-columns:repeat(2,1fr);}
-          .partners-grid{grid-template-columns:repeat(2,1fr);}
-          .team-grid{grid-template-columns:repeat(2,1fr);}
-          .stats-inner{grid-template-columns:repeat(2,1fr);}
-          .story-accent{right:0;}
-          .mission-grid{gap:2rem;}
-        }
-        @media(max-width:600px){
-          .values-grid,.partners-grid,.team-grid{grid-template-columns:1fr;}
-          .stats-inner{grid-template-columns:1fr 1fr;}
-        }
-      `}</style>
-
-      {/* ── HERO ─────────────────────────────────────────────── */}
-      <section className="hero">
-        <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', overflow: 'hidden' }}>
-          <div className="hero-deco-ring" style={{ width: 600, height: 600, top: -200, right: -150 }} />
-          <div className="hero-deco-ring" style={{ width: 400, height: 400, top: -80, right: 0, borderColor: 'rgba(232,168,76,0.08)' }} />
-          <div className="hero-deco-dot"  style={{ width: 80,  height: 80,  top: '20%',  right: '12%' }} />
-          <div className="hero-deco-dot"  style={{ width: 40,  height: 40,  bottom: '25%', right: '20%', background: 'var(--brand-primary)', animationDelay: '2s' }} />
-          <div className="hero-deco-dot"  style={{ width: 20,  height: 20,  top: '50%',  right: '35%', animationDelay: '1s' }} />
-        </div>
-
-        <div className="hero-inner">
-          {/* content */}
-          <div ref={heroRef} className="anim-fade-up">
-            <div className="hero-badge">
-              <span className="pulse-dot" />
-              About Omonile App
+          <div>
+            <div className="ab-hero-badge">
+              <span className="ab-dot" /> About Omonile App
             </div>
-            <h1 className="hero-title">
-              Ending Land Fraud<br />
-              in <span className="gradient-text">Nigeria</span>
+            <h1 className="ab-hero-title">
+              Ending Land Fraud<br />in{' '}
+              <span className="ab-grad">Nigeria</span>
             </h1>
-            <p className="hero-desc">
+            <p className="ab-hero-desc">
               We&apos;re on a mission to bring trust, transparency, and security to
               Nigeria&apos;s land and property sector — combining technology,
-              professional expertise, and blockchain security.
+              professional expertise, and blockchain-anchored records.
             </p>
-            <div className="hero-actions">
-              <button className="btn-primary">Verify a Property</button>
-              <button className="btn-ghost">Learn More ↓</button>
+            <div className="ab-hero-btns">
+              <Link href="/listings" className="ab-btn-primary">Browse Properties <ArrowRight size={16} /></Link>
+              <Link href="/verify"   className="ab-btn-ghost">Verify a Property</Link>
             </div>
           </div>
 
-          {/* floating card */}
-          <div className="hero-visual-col" style={{ display: 'flex', justifyContent: 'center' }} aria-hidden="true">
-            <div className="card-stack">
-              <div className="h-card h-card-b2">
-                <div style={{ height: 10, background: 'var(--bg-surface-2)', borderRadius: 4, marginBottom: 8 }} />
-                <div style={{ height: 8,  background: 'var(--bg-surface-2)', borderRadius: 4, width: '70%' }} />
+          <div className="ab-hero-visual" style={{ display:'flex', justifyContent:'center' }} aria-hidden="true">
+            <div className="ab-card-stack">
+              <div className="ab-fcard ab-fcard-b2">
+                <div style={{ height:10, background:'var(--bg-surface-2)', borderRadius:4, marginBottom:8 }} />
+                <div style={{ height:8,  background:'var(--bg-surface-2)', borderRadius:4, width:'60%' }} />
               </div>
-              <div className="h-card h-card-b1">
-                <div style={{ height: 10, background: 'var(--bg-surface-2)', borderRadius: 4, marginBottom: 8 }} />
-                <div style={{ height: 8,  background: 'var(--bg-surface-2)', borderRadius: 4, width: '60%' }} />
+              <div className="ab-fcard ab-fcard-b1">
+                <div style={{ height:10, background:'var(--bg-surface-2)', borderRadius:4, marginBottom:8 }} />
+                <div style={{ height:8,  background:'var(--bg-surface-2)', borderRadius:4, width:'50%' }} />
               </div>
-              <div className="h-card h-card-main">
-                <div className="h-card-icon">
-                  <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth={2}>
-                    <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                  </svg>
-                </div>
-                <p style={{ fontFamily: 'var(--font-display)', fontSize: '.9rem', fontWeight: 700, marginBottom: '.25rem' }}>Property Verified</p>
-                <p style={{ fontSize: '.78rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
-                  Block 14, Lekki Phase 1, Lagos State — Title confirmed &amp; blockchain-secured.
-                </p>
-                <div className="h-card-verified">
-                  <span className="pulse-dot" />
-                  NDPC Compliant · Blockchain Secured
+              <div className="ab-fcard ab-fcard-main">
+                <div className="ab-fcard-icon"><ShieldCheck size={20} /></div>
+                <p style={{ fontFamily:'var(--font-display)', fontSize:'0.9rem', fontWeight:700, color:'var(--text-primary)', margin:'0 0 0.25rem' }}>Property Verified</p>
+                <p style={{ fontSize:'0.78rem', color:'var(--text-muted)', lineHeight:1.5, margin:0 }}>Block 14, Lekki Phase 1 — Title confirmed &amp; blockchain-secured.</p>
+                <div style={{ display:'flex', alignItems:'center', gap:6, marginTop:'0.65rem', fontSize:'0.7rem', fontWeight:600, color:'#27ae60' }}>
+                  <span className="ab-dot" /> NDPC Compliant · Blockchain Secured
                 </div>
               </div>
             </div>
@@ -434,61 +264,136 @@ export default function AboutPage() {
         </div>
       </section>
 
-     
+      {/* ══ STATS ═══════════════════════════════════════════════════ */}
+      <div className="ab-stats">
+        <div className="ab-stats-grid">
+          {stats.map(({ Icon, num, label }) => (
+            <div key={label}>
+              <div className="ab-stat-icon"><Icon size={18} /></div>
+              <div className="ab-stat-num">{num}</div>
+              <div className="ab-stat-lbl">{label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
 
-      {/* ── STORY ────────────────────────────────────────────── */}
-      <section className="section">
-        <div className="inner">
-          <div className="story-grid">
-            <div ref={storyVRef} className="anim-scale-in" style={{ position: 'relative' }}>
-              <div className="story-frame">
-                <svg width="64" height="64" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1} opacity={0.25}>
-                  <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-                  <polyline points="9 22 9 12 15 12 15 22" />
-                </svg>
-                <span style={{ fontSize: '.8rem', fontWeight: 500 }}>Nigeria&apos;s Land, Secured</span>
+     {/* ══ STORY ═══════════════════════════════════════════════════ */}
+      <section className="ab-section">
+        <div className="ab-inner">
+          <div className="ab-story-grid">
+
+            <div style={{ position: 'relative' }}>
+              <div className="ab-story-visual" style={{ padding: 0, overflow: 'hidden', background: 'none' }}>
+                <img
+                  src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80"
+                  alt="Nigerian property — Nigeria's Land, Secured"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center',
+                    display: 'block',
+                    borderRadius: 'inherit',
+                  }}
+                />
+                {/* subtle dark overlay so the caption stays readable */}
+                <div style={{
+                  position: 'absolute',
+                  inset: 0,
+                  background: 'linear-gradient(to top, rgba(10,26,15,0.55) 0%, transparent 50%)',
+                  borderRadius: 'inherit',
+                  pointerEvents: 'none',
+                }} />
+                <span style={{
+                  position: 'absolute',
+                  bottom: '1rem',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  fontSize: '0.8rem',
+                  fontWeight: 500,
+                  color: '#fff',
+                  whiteSpace: 'nowrap',
+                  letterSpacing: '0.03em',
+                  textShadow: '0 1px 4px rgba(0,0,0,0.4)',
+                }}>
+                  Nigeria&apos;s Land, Secured
+                </span>
               </div>
-              <div className="story-accent">
-                <div style={{ fontSize: '.72rem', fontWeight: 700, letterSpacing: '.1em', textTransform: 'uppercase', color: 'rgba(15,28,20,.6)' }}>Est.</div>
-                <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.6rem', fontWeight: 900, lineHeight: 1.1 }}>2025</div>
+
+              <div className="ab-story-accent">
+                <div style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(15,28,20,0.55)' }}>Est.</div>
+                <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.6rem', fontWeight: 900, lineHeight: 1.1, color: '#0f1c14' }}>2025</div>
               </div>
             </div>
 
-            <div ref={storyCRef} className="anim-fade-up d2">
-              <SectionLabel>Our Story</SectionLabel>
-              <h2 className="story-title">Built to Protect Nigerians from Land Fraud</h2>
-              <div className="story-body">
+            <div>
+              <span className="ab-label">Our Story</span>
+              <h2 className="ab-story-title">Built to Protect Nigerians from Land Fraud</h2>
+              <div className="ab-story-body">
                 <p>Omonile App was founded in 2025 by <strong>CHRIVON TECH SOLUTIONS LTD</strong> with a single mission — to bring trust and transparency to Nigeria&apos;s land and property sector.</p>
-                <p>After witnessing countless Nigerians lose their life savings to land fraud, we built a platform that combines technology, professional expertise, and blockchain security to make property verification accessible to everyone.</p>
+                <p>After witnessing countless Nigerians lose their life savings to land fraud, we built a platform combining technology, professional expertise, and blockchain security to make property verification accessible to everyone.</p>
               </div>
-              <blockquote className="story-quote">
-                &ldquo;Every Nigerian deserves to know the land they&apos;re buying is truly theirs — we built Omonile to make that guarantee a reality.&rdquo;
+              <blockquote className="ab-quote">
+                <Quote size={18} className="ab-quote-icon" />
+                <span className="ab-quote-text">Every Nigerian deserves to know the land they&apos;re buying is truly theirs — we built Omonile to make that guarantee a reality.</span>
               </blockquote>
             </div>
+
           </div>
         </div>
       </section>
 
-     
-      {/* ── TEAM ─────────────────────────────────────────────── */}
-      <section className="section">
-        <div className="inner">
-          <div className="team-header">
-            <SectionLabel>Our Team</SectionLabel>
-            <h2 style={{ fontSize: 'clamp(1.8rem,3.5vw,2.5rem)', fontWeight: 800, marginBottom: '.75rem' }}>The People Behind Omonile</h2>
-            <p style={{ color: 'var(--text-muted)', maxWidth: 480, margin: '0 auto' }}>Experienced operators, technologists, and strategists united by one mission.</p>
+      {/* ══ VALUES ══════════════════════════════════════════════════ */}
+      <section className="ab-section ab-values-bg">
+        <div className="ab-inner">
+          <div style={{ maxWidth:560 }}>
+            <span className="ab-label">Our Mission &amp; Values</span>
+            <h2 style={{ fontFamily:'var(--font-display)', fontSize:'clamp(1.8rem,3.5vw,2.4rem)', fontWeight:800, color:'var(--text-primary)', letterSpacing:'-0.02em', margin:'0 0 0.75rem' }}>Why We Exist</h2>
+            <p style={{ fontSize:'1rem', color:'var(--text-secondary)', lineHeight:1.75, fontStyle:'italic', margin:0 }}>
+              To democratise access to verified, secure, and legally-sound property transactions in Nigeria — empowering millions to build generational wealth on land they can trust.
+            </p>
           </div>
-          <div ref={teamRef} className="team-grid anim-fade-up">
-            {team.map((m) => (
-              <div key={m.name} className="team-card">
-                <div className="team-img">
-                  <div className="avatar">{m.initials}</div>
-                  <div className="team-overlay" />
+          <div className="ab-values-grid">
+            {values.map(({ Icon, title, body }) => (
+              <div key={title} className="ab-val-card">
+                <div className="ab-val-icon"><Icon size={20} /></div>
+                <p className="ab-val-title">{title}</p>
+                <p className="ab-val-body">{body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══ TEAM ════════════════════════════════════════════════════ */}
+      <section className="ab-section">
+        <div className="ab-inner">
+          <div className="ab-team-hd">
+            <span className="ab-label">Our Team</span>
+           
+            <h2 style={{ color:'var(--text-muted)', maxWidth:800, margin:'0 auto', fontSize:'2rem' }}>Experienced operators, technologists, and strategists united by one mission.</h2>
+          </div>
+          <div className="ab-team-grid">
+            {team.map(({ name, initials, role, bio, gradient, image }) => (
+              <div key={name} className="ab-team-card">
+                <div className="ab-team-img">
+                  {image ? (
+                    <Image
+                      src={image}
+                      alt={name}
+                      fill
+                      sizes="(max-width:600px) 100vw, (max-width:960px) 50vw, 33vw"
+                      style={{ objectFit:'cover', objectPosition:'center top' }}
+                    />
+                  ) : (
+                    <div className="ab-avatar" style={{ background:gradient }}>{initials}</div>
+                  )}
+                  <div className="ab-team-overlay" />
                 </div>
-                <div className="team-body">
-                  <div className="team-name">{m.name}</div>
-                  <div className="team-role">{m.role}</div>
-                  <div className="team-bio">{m.bio}</div>
+                <div className="ab-team-body">
+                  <p className="ab-team-name">{name}</p>
+                  <p className="ab-team-role">{role}</p>
+                  <p className="ab-team-bio">{bio}</p>
                 </div>
               </div>
             ))}
@@ -496,29 +401,46 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── PARTNERS ─────────────────────────────────────────── */}
-      <section className="section partners-section">
-        <div className="inner" style={{ position: 'relative', zIndex: 1 }}>
-          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <SectionLabel light>Our Partners</SectionLabel>
-            <h2 ref={partnersRef} className="anim-fade-up" style={{ fontSize: 'clamp(1.6rem,3vw,2.2rem)', fontWeight: 800, color: 'white' }}>
+      {/* ══ PARTNERS ════════════════════════════════════════════════ */}
+      <section className="ab-section ab-partners-bg">
+        <div className="ab-inner" style={{ position:'relative', zIndex:1 }}>
+          <div style={{ textAlign:'center', marginBottom:'3rem' }}>
+            <span className="ab-label ab-label-light">Our Partners</span>
+            <h2 style={{ fontFamily:'var(--font-display)', fontSize:'clamp(1.6rem,3vw,2.2rem)', fontWeight:800, color:'white', margin:0 }}>
               Backed by Institutions You Can Trust
             </h2>
           </div>
-          <div className="partners-grid">
-            {partners.map((p) => (
-              <div key={p.name} className="partner-card">
-                <div className="partner-icon">{p.icon}</div>
-                <p style={{ fontSize: '.95rem', fontWeight: 700, color: 'white', marginBottom: '.35rem' }}>{p.name}</p>
-                <p style={{ fontSize: '.8rem', color: 'rgba(255,255,255,.55)', marginBottom: '.6rem' }}>{p.description}</p>
-                <span className={`partner-badge${p.pending ? ' partner-badge-pending' : ''}`}>{p.badge}</span>
+          <div className="ab-partners-grid">
+            {partners.map(({ Icon, name, desc, badge, pending }) => (
+              <div key={name} className="ab-partner-card">
+                <div className="ab-partner-icon"><Icon size={22} /></div>
+                <p className="ab-partner-name">{name}</p>
+                <p className="ab-partner-desc">{desc}</p>
+                <span className={`ab-partner-badge${pending ? ' ab-partner-badge-pending' : ''}`}>{badge}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-    
+      
+
+      {/* ══ CTA ═════════════════════════════════════════════════════ */}
+      <div className="ab-cta-wrap">
+        <div className="ab-cta-card">
+          <div className="ab-cta-inner">
+            <p style={{ fontFamily:'var(--font-display)', fontSize:'0.72rem', fontWeight:700, letterSpacing:'0.14em', textTransform:'uppercase', color:'rgba(255,255,255,0.6)', margin:'0 0 1rem' }}>Join the Movement</p>
+            <h2 style={{ fontFamily:'var(--font-display)', fontSize:'clamp(1.9rem,4vw,3rem)', fontWeight:900, color:'white', margin:'0 0 1rem', letterSpacing:'-0.03em' }}>Ready to Secure Your Property?</h2>
+            <p style={{ fontSize:'1.05rem', color:'rgba(255,255,255,0.7)', maxWidth:520, margin:'0 auto 2.5rem', lineHeight:1.7 }}>
+              Join 8,500+ Nigerians who now buy, sell, and rent with total confidence on Omonile.
+            </p>
+            <div className="ab-cta-actions">
+              <Link href="/signup"   className="ab-btn-gold">Get Started Free <ArrowRight size={16} /></Link>
+              <Link href="/listings" className="ab-btn-white">Browse Properties</Link>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

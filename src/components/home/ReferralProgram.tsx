@@ -9,12 +9,7 @@ const LEADERBOARD = [
   { rank: 3, name: 'Mr. Oluwole', initials: 'MO', referrals: 5, earnings: '₦50,000', color: '#22883f' },
 ];
 
-const REWARDS = [
-  { action: 'Verifies a property', you: '₦10,000', friend: '₦5,000 off verification fee' },
-  { action: 'Books a short-let (min. 2 nights)', you: '₦10,000', friend: '₦5,000 off booking' },
-  { action: 'Lists a property for sale', you: '₦10,000', friend: 'Free verification (up to ₦50,000)' },
-  { action: 'Signs a yearly rental lease', you: '₦10,000', friend: '₦5,000 off first month' },
-];
+
 
 const STEPS = [
   { n: '01', label: 'Share your unique referral link with friends' },
@@ -123,33 +118,7 @@ export function ReferralProgram() {
           </div>
         </div>
 
-        {/* ── Reward table ── */}
-        <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-subtle)', borderRadius: '16px', overflow: 'hidden', marginBottom: '1.25rem' }}>
-          <div style={{ padding: '1.1rem 1.5rem', borderBottom: '1px solid var(--border-subtle)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <TrendingUp size={16} color="#1a6b3c" />
-            <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.95rem', color: 'var(--text-primary)', margin: 0 }}>Reward Structure</h3>
-          </div>
-          <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: '500px' }}>
-              <thead>
-                <tr style={{ background: 'var(--bg-surface-2)' }}>
-                  {["Friend's Action", 'You Earn', 'Friend Saves'].map(h => (
-                    <th key={h} style={{ padding: '0.75rem 1.5rem', textAlign: 'left', fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>{h}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {REWARDS.map((r, i) => (
-                  <tr key={i} style={{ borderTop: '1px solid var(--border-subtle)' }}>
-                    <td style={{ padding: '0.9rem 1.5rem', fontFamily: 'var(--font-body)', fontSize: '0.8rem' }}>{r.action}</td>
-                    <td style={{ padding: '0.9rem 1.5rem', fontFamily: 'var(--font-display)', fontWeight: 700, color: '#1a6b3c' }}>{r.you}</td>
-                    <td style={{ padding: '0.9rem 1.5rem', fontFamily: 'var(--font-body)', fontSize: '0.75rem', color: 'var(--text-muted)' }}>{r.friend}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+        
 
         {/* ── Leaderboard ── */}
         <div style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-subtle)', borderRadius: '16px', overflow: 'hidden', boxShadow: 'var(--shadow-sm)' }}>

@@ -21,7 +21,7 @@ export function SearchSection() {
       {/* ── Background map ── */}
       <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
         <Image
-          src="/assets/home/lagos-map.png"
+          src="https://i.pinimg.com/1200x/87/03/a7/8703a7b00bd7c2e715f1c77dd2eadf7d.jpg"
           alt=""
           fill
           priority
