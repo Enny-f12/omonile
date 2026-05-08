@@ -44,12 +44,12 @@ const PROFESSIONALS = [
     title: 'For Lawyers',
     headline: "Earn from Nigeria's growing property market",
     description: "Get paid for title searches and document verification. Join Nigeria's fastest-growing property verification network.",
-    perks: ['Flexible work schedule', 'Direct client connections', 'Earn ₦15,000–₦80,000 per case'],
+    perks: ['Flexible work schedule', 'Direct client connections', 'Earn per case'],
     cta: 'Apply as Lawyer',
     href: '/professionals/apply?role=lawyer',
     color: '#b8832a', colorBg: 'rgba(232,168,76,0.08)',
     colorBorder: 'rgba(232,168,76,0.25)', colorActive: '#9a6d22',
-    image: 'https://i.pinimg.com/1200x/7d/15/dc/7d15dc71df387f2665643063d4a1805c.jpg',
+    image: 'https://i.pinimg.com/1200x/5d/37/9c/5d379c60f389adb6af6507754685d267.jpg',
     imagePos: 'center top',
   },
   {
@@ -75,7 +75,7 @@ const PROFESSIONALS = [
     href: '/professionals/apply?role=facility-manager',
     color: '#b8832a', colorBg: 'rgba(232,168,76,0.08)',
     colorBorder: 'rgba(232,168,76,0.25)', colorActive: '#9a6d22',
-    image: 'https://i.pinimg.com/1200x/f5/0f/1b/f50f1b53367dfd58d85d046849b53f1b.jpg',
+    image: 'https://i.pinimg.com/1200x/75/fe/af/75feaf12e2056b62ed98c0c1ff2931a2.jpg',
     imagePos: 'center top',
   },
 ];
@@ -169,7 +169,7 @@ export function ProfessionalNetwork() {
                 src={prof.image}
                 alt={prof.title}
                 fill
-                sizes="(max-width: 768px) 100vw, 50vw"
+                sizes="(max-width: 768px) 100vw, 70vw"
                 style={{ objectFit: 'cover', objectPosition: prof.imagePos }}
               />
               <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.12) 40%, ${prof.color}dd 100%)` }} />

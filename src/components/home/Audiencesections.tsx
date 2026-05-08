@@ -34,19 +34,21 @@ function CheckItem({ label, color }: { label: string; color: string }) {
 ══════════════════════════════════════════════════════════════ */
 export function ForBuyers() {
   const features = [
+    'Instant land verification',
     'Lawyer-verified land titles',
-    'Instant AI land verification',
     'Escrow payment protection',
-    'GIS risk & flood mapping',
-    'Access to property lawyers',
-    'Federal registry search',
-    'Fair market pricing data',
     'Blockchain certificates',
+    'Access to top lawyers',
+    'GIS risk mapping',
+    'Fair market pricing',
+    'Federal registry search',
+
+
   ];
 
   return (
-    <section style={{ position: 'relative', overflow: 'hidden',background: 'var(--bg-surface-2)' }}>
-        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '4px', background: 'linear-gradient(90deg, #e8a84c 0%, #f2c06e 50%, #e8a84c 100%)' }} />
+    <section style={{ position: 'relative', overflow: 'hidden', background: 'var(--bg-surface-2)' }}>
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '4px', background: 'linear-gradient(90deg, #e8a84c 0%, #f2c06e 50%, #e8a84c 100%)' }} />
       <div style={{
         display: 'grid', gridTemplateColumns: '1fr 1fr',
         minHeight: '580px',
@@ -78,7 +80,7 @@ export function ForBuyers() {
             lineHeight: 1.1, marginBottom: '1rem',
           }}>
             Buy land & property<br />
-            <span style={{color: '#b8832a' }}>with zero risk.</span>
+            <span style={{ color: '#b8832a' }}>with zero risk.</span>
           </h2>
 
           <p style={{
@@ -132,14 +134,14 @@ export function ForBuyers() {
         {/* Right: image with overlay stats */}
         <div style={{ position: 'relative', minHeight: '480px' }}>
           <Image
-            src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=900&q=85"
+            src="https://i.pinimg.com/1200x/4d/c5/d9/4dc5d911317f28766a794b969ed32ced.jpg"
             alt="Property buyer"
             fill
             sizes="50vw"
             style={{ objectFit: 'cover', objectPosition: 'center' }}
           />
           {/* Dark overlay */}
-         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to left, var(--bg-surface-2) 0%, transparent 40%)' }} />
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to left, var(--bg-surface-2) 0%, transparent 40%)' }} />
 
           {/* Floating stat cards */}
           <div style={{ position: 'absolute', bottom: '2rem', right: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
@@ -153,7 +155,7 @@ export function ForBuyers() {
                 background: '#e8a84c', boxShadow: '0 8px 32px rgba(232,168,76,0.45)',
                 backdropFilter: 'blur(12px)',
                 border: '1px solid rgba(255,255,255,0.1)',
-                
+
               }}>
                 <p style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '1.3rem', color: s.color, margin: 0, lineHeight: 1 }}>{s.value}</p>
                 <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: '#000000', margin: '0.25rem 0 0' }}>{s.label}</p>
@@ -173,25 +175,52 @@ export function ForBuyers() {
 ══════════════════════════════════════════════════════════════ */
 export function ForSellers() {
   const features = [
-    'Escrow protects your payment',
-    'Listing analytics dashboard',
-    'Direct connection to buyers',
+    'showcase with pro photos',
     '"Verified" badge builds trust',
-    'Reach diaspora Nigerians',
-    'Competitive commission rates',
-    'Professional photo showcase',
+    'Direct connection to buyers',
+    'Listing analytics ',
+    'Escrow protects payment',
     'Facility manager support',
+    'Reach diaspora Nigerians',
+
+    'Competitive commission rates',
+
+
   ];
 
   return (
-    <section style={{ position: 'relative', overflow: 'hidden', background: 'var(--bg-surface-2)' , marginTop: '40px',}}>
+    <section style={{ position: 'relative', overflow: 'hidden', background: 'var(--bg-surface-2)', marginTop: '40px', }}>
       {/* Top accent line */}
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '4px', background: 'linear-gradient(90deg, #e8a84c 0%, #f2c06e 50%, #e8a84c 100%)' }} />
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: '580px' }} className="audience-layout">
 
-       
 
+        {/* Left: image */}
+        <div style={{ position: 'relative', minHeight: '480px' }}>
+          <Image
+            src="https://i.pinimg.com/736x/47/2f/99/472f99e4888b7dacffd43603a0de33d4.jpg"
+            alt="Property seller"
+            fill
+            sizes="50vw"
+            style={{ objectFit: 'cover', objectPosition: 'center top' }}
+          />
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to left, var(--bg-surface-2) 0%, transparent 40%)' }} />
+
+          {/* Verified badge floating */}
+          <div style={{
+            position: 'absolute', bottom: '2.5rem', left: '2rem',
+            display: 'flex', alignItems: 'center', gap: '10px',
+            padding: '0.85rem 1.25rem', borderRadius: '14px',
+            background: '#e8a84c', boxShadow: '0 8px 32px rgba(232,168,76,0.45)',
+          }}>
+            <ShieldCheck size={22} color="#0f1c14" strokeWidth={2.5} />
+            <div>
+              <p style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '0.9rem', color: '#0f1c14', margin: 0, lineHeight: 1.1 }}>Verified Seller</p>
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.68rem', color: 'rgba(15,28,20,0.65)', margin: '0.15rem 0 0' }}>Badge increases views by 3×</p>
+            </div>
+          </div>
+        </div>
         {/* Right: content */}
         <div style={{
           padding: 'clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem)',
@@ -240,7 +269,7 @@ export function ForSellers() {
             <Link href="/listings/new" style={{
               display: 'inline-flex', alignItems: 'center', gap: '7px',
               padding: '0.85rem 1.75rem', borderRadius: '9999px',
-               background: '#e8a84c', color: '#0d3d22',
+              background: '#e8a84c', color: '#0d3d22',
               fontFamily: 'var(--font-body)', fontWeight: 700, fontSize: '0.9rem',
               textDecoration: 'none', boxShadow: '0 6px 24px rgba(26,107,60,0.3)',
               transition: 'all 200ms ease',
@@ -253,31 +282,7 @@ export function ForSellers() {
           </div>
         </div>
 
-         {/* Left: image */}
-        <div style={{ position: 'relative', minHeight: '480px' }}>
-          <Image
-            src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=900&q=85"
-            alt="Property seller"
-            fill
-            sizes="50vw"
-            style={{ objectFit: 'cover', objectPosition: 'center top' }}
-          />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to left, var(--bg-surface-2) 0%, transparent 40%)' }} />
 
-          {/* Verified badge floating */}
-          <div style={{
-            position: 'absolute', bottom: '2.5rem', left: '2rem',
-            display: 'flex', alignItems: 'center', gap: '10px',
-            padding: '0.85rem 1.25rem', borderRadius: '14px',
-            background: '#e8a84c', boxShadow: '0 8px 32px rgba(232,168,76,0.45)',
-          }}>
-            <ShieldCheck size={22} color="#0f1c14" strokeWidth={2.5} />
-            <div>
-              <p style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '0.9rem', color: '#0f1c14', margin: 0, lineHeight: 1.1 }}>Verified Seller</p>
-              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.68rem', color: 'rgba(15,28,20,0.65)', margin: '0.15rem 0 0' }}>Badge increases views by 3×</p>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
@@ -290,51 +295,27 @@ export function ForSellers() {
 ══════════════════════════════════════════════════════════════ */
 export function ForRenters() {
   const features = [
-    'Property matches photos exactly',
+    'Facility manager verified properties',
+    'Property matches photos ',
+    'Escrow protects payment',
     'Clean, safe accommodations',
     'Easy online booking',
     '24/7 guest support',
-    'Escrow protects your payment',
+    
     'Neighborhood safety scores',
-    'Facility manager verified',
+    
     'Real, verified guest reviews',
   ];
 
   return (
     <section style={{ position: 'relative', overflow: 'hidden', background: '#0c1410', marginTop: '40px' }}>
-         
+
       {/* Subtle green glow top-right */}
       <div style={{ position: 'absolute', top: '-100px', right: '-100px', width: '400px', height: '400px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(26,107,60,0.12) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: '580px' }} className="audience-layout">
 
-        {/* Left: image */}
-        <div style={{ position: 'relative', minHeight: '480px' }}>
-          <Image
-            src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=900&q=85"
-            alt="Short-let rental"
-            fill
-            sizes="50vw"
-            style={{ objectFit: 'cover', objectPosition: 'center' }}
-          />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to left, #0c1410 0%, transparent 40%)' }} />
-
-          {/* Rating badge */}
-          <div style={{
-            position: 'absolute', top: '2rem', left: '2rem',
-            padding: '0.75rem 1.1rem', borderRadius: '14px',
-            background: 'rgba(12,20,16,0.85)',
-            backdropFilter: 'blur(12px)',
-            border: '1px solid rgba(255,255,255,0.08)',
-            boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '0.2rem' }}>
-              {[1,2,3,4,5].map(i => <svg key={i} width="12" height="12" viewBox="0 0 12 12"><polygon points="6,1 7.5,4.5 11,5 8.5,7.5 9,11 6,9.5 3,11 3.5,7.5 1,5 4.5,4.5" fill="#e8a84c" /></svg>)}
-              <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.8rem', color: '#e8a84c', marginLeft: '4px' }}>4.9</span>
-            </div>
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.7rem', color: 'rgba(255,255,255,0.55)', margin: 0 }}>8,500+ verified guests</p>
-          </div>
-        </div>
+       
 
         {/* Right: content */}
         <div style={{
@@ -396,6 +377,35 @@ export function ForRenters() {
             </Link>
           </div>
         </div>
+
+         {/* Left: image */}
+        <div style={{ position: 'relative', minHeight: '480px' }}>
+          <Image
+            src="https://i.pinimg.com/1200x/36/5e/95/365e950558fdc93ecf2b0a921017b1c5.jpg"
+            alt="Short-let rental"
+            fill
+            sizes="50vw"
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+          />
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to left, #0c1410 0%, transparent 40%)' }} />
+
+          {/* Rating badge */}
+          <div style={{
+            position: 'absolute', top: '2rem', left: '2rem',
+            padding: '0.75rem 1.1rem', borderRadius: '14px',
+            background: 'rgba(12,20,16,0.85)',
+            backdropFilter: 'blur(12px)',
+            border: '1px solid rgba(255,255,255,0.08)',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '0.2rem' }}>
+              {[1, 2, 3, 4, 5].map(i => <svg key={i} width="12" height="12" viewBox="0 0 12 12"><polygon points="6,1 7.5,4.5 11,5 8.5,7.5 9,11 6,9.5 3,11 3.5,7.5 1,5 4.5,4.5" fill="#e8a84c" /></svg>)}
+              <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.8rem', color: '#e8a84c', marginLeft: '4px' }}>4.9</span>
+            </div>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.7rem', color: 'rgba(255,255,255,0.55)', margin: 0 }}>8,500+ verified guests</p>
+          </div>
+        </div>
+
       </div>
 
       <style>{`

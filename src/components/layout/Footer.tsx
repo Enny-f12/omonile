@@ -6,29 +6,32 @@ import { useState } from 'react';
 
 const FOOTER_LINKS = {
   Explore: [
-    { label: 'Buy Land',       href: '/listings?type=land' },
-    { label: 'Buy Property',   href: '/listings?type=property-sale' },
-    { label: 'Shortlet',       href: '/listings?type=short-let' },
-    { label: 'Rentals',        href: '/listings?type=yearly-rent' },
-    { label: 'Yearly Rentals', href: '/listings?type=yearly-rent' },
+    { label: 'Buy Land',       href: '/' },
+    { label: 'Buy Property',   href: '/' },
+    { label: 'Shortlet',       href: '/' },
+    { label: 'Rentals',        href: '/' },
+    { label: 'Yearly Rentals', href: '/' },
   ],
   Professionals: [
-    { label: 'For Lawyers',           href: '/professionals/lawyers' },
-    { label: 'For Surveyors',         href: '/professionals/surveyors' },
-    { label: 'For Facility Managers', href: '/professionals/facility-managers' },
-    { label: 'For Community Leaders', href: '/professionals/community-leaders' },
-    { label: 'For Cleaning Partners', href: '/professionals/cleaning-partners' },
+    { label: 'For Lawyers',           href: '/' },
+    { label: 'For Surveyors',         href: '/' },
+    { label: 'For Facility Managers', href: '/' },
+    { label: 'For Community Leaders', href: '/' },
+    { label: 'For Cleaning Partners', href: '/' },
   ],
   Company: [
     { label: 'About us',    href: '/about' },
-    { label: 'How it works',href: '/#how-it-works' },
+    { label: 'How it works',href: '/how-it-works' },
+     { label: 'Area Guides',href: '/' },
+      { label: 'Market Insights',href: '/' },
+       { label: 'Referral',href: '/' },
   ],
   Support: [
-    { label: 'Help Center',      href: '/help' },
-    { label: 'Contact Us',       href: '/contact' },
-    { label: 'Terms of service', href: '/terms' },
-    { label: 'Privacy Policy',   href: '/privacy' },
-    { label: 'FAQ',              href: '/faq' },
+    { label: 'Help Center',      href: '/' },
+    { label: 'Contact Us',       href: '/' },
+    { label: 'Terms of service', href: '/' },
+    { label: 'Privacy Policy',   href: '/' },
+    { label: 'FAQ',              href: '' },
   ],
 };
 

@@ -10,7 +10,7 @@ const STEPS = [
   {
     number: 1,
     title: 'Create Your Account & Profile',
-    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&q=80',
+    image: 'https://i.pinimg.com/736x/27/e6/37/27e637c85c3cda15c336feb89056fb2e.jpg',
     imageAlt: 'User profile creation screen with avatar and verification badge',
     bullets: [
       'Sign up with email or phone',

@@ -25,8 +25,8 @@ export default function Home() {
         <NeighborhoodSafety/>
         <HowItWorks/>
         <ForBuyers/>
-        <ForRenters/>
         <ForSellers/>
+        <ForRenters/>
         <ProfessionalNetwork/>
         <ActivityFeed/>
         <Testimonials/>

@@ -41,21 +41,47 @@ export function HowItWorks() {
             id="how-it-works"
             style={{
                 padding: 'clamp(3rem, 6vw, 5.5rem) 0',
-                background: 'var(--bg-base)',
-                position: 'relative', overflow: 'hidden',
+                position: 'relative',
+                overflow: 'hidden',
             }}
         >
-            {/* Bg glow */}
+            {/* ── Background image ── */}
             <div style={{
-                position: 'absolute', inset: 0, pointerEvents: 'none',
-                background: 'radial-gradient(ellipse 70% 60% at 50% 60%, rgba(26,107,60,0.04) 0%, transparent 70%)',
+                position: 'absolute',
+                inset: 0,
+                backgroundImage: 'url("/assets/mapline.jpg")', 
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                zIndex: 0,
             }} />
 
+            {/* ── Overlay — keeps bg subtle and content readable ── */}
             <div style={{
-                width: '100%', maxWidth: '1000px',
+                position: 'absolute',
+                inset: 0,
+                background: 'var(--bg-base, #fff)',
+                opacity: 0.88, // ← tweak between 0.82–0.93 to taste
+                zIndex: 1,
+            }} />
+
+            {/* ── Ambient glow (on top of overlay) ── */}
+            <div style={{
+                position: 'absolute',
+                inset: 0,
+                pointerEvents: 'none',
+                background: 'radial-gradient(ellipse 70% 60% at 50% 60%, rgba(26,107,60,0.04) 0%, transparent 70%)',
+                zIndex: 2,
+            }} />
+
+            {/* ── Content ── */}
+            <div style={{
+                width: '100%',
+                maxWidth: '1000px',
                 marginInline: 'auto',
                 padding: '0 clamp(1rem, 4vw, 3rem)',
-                position: 'relative', zIndex: 1,
+                position: 'relative',
+                zIndex: 3,
             }}>
 
                 {/* ── Header ── */}
@@ -189,13 +215,11 @@ export function HowItWorks() {
                                     </div>
                                 </div>
 
-                                {/* Connector line — sits between columns, vertically centered on icons */}
+                                {/* Connector line */}
                                 {!isLast && (
                                     <div style={{
                                         display: 'flex',
                                         alignItems: 'center',
-                                        // push down to align with center of icon
-                                        // number (0.72rem + 0.55rem margin) + half icon (30px) ≈ 52px
                                         paddingTop: '52px',
                                         width: 'clamp(1rem, 3vw, 2rem)',
                                         flexShrink: 0,
@@ -207,7 +231,6 @@ export function HowItWorks() {
                                             background: `linear-gradient(to right, ${step.colorBorder}, ${STEPS[i + 1].colorBorder})`,
                                             position: 'relative',
                                         }}>
-                                            {/* End dot */}
                                             <div style={{
                                                 position: 'absolute',
                                                 right: '-3px', top: '50%',

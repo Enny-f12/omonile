@@ -24,7 +24,7 @@ const STEPS_CONFIG = [
   { 
     number: 1,
     title: 'Choose Your Professional Role', 
-    image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&q=80',
+    image: 'https://i.pinimg.com/736x/27/e6/37/27e637c85c3cda15c336feb89056fb2e.jpg',
     imageAlt: 'Professional selecting role',
     desc: 'Select whether you\'re applying as a Lawyer, Surveyor, Facility Manager, or Community Leader.',
     bullets: [
