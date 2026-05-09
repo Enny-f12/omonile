@@ -9,10 +9,10 @@ import { ThemeToggle } from './ui/ThemeToggle';
 const NAV_LINKS = [
  { label: 'Browse',          href: '/listings' },
   { label: 'How it Works',      href: '/how-it-works' },
-  { label: 'Professionals',          href: '/' },
-  { label: 'Area Guides',             href: '/' },
-   { label: 'Market Insights', href: '/' },
-   { label: 'Calculator',          href: '/' },
+  { label: 'Professionals',          href: '/coming-soon  ' },
+  { label: 'Area Guides',             href: '/coming-soon' },
+   { label: 'Market Insights', href: '/coming-soon' },
+   { label: 'Calculator',          href: '/coming-soon' },
 
 ];
 
@@ -100,10 +100,10 @@ export function Navbar() {
             <ThemeToggle />
 
             <div className="navbar-desktop" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <Link href="/login" className="navbar-btn-outline" style={{ color: solid ? 'var(--text-primary)' : 'white', borderColor: solid ? 'var(--border-default)' : 'rgba(255,255,255,0.35)' }}>
+              <Link href="/coming-soon" className="navbar-btn-outline" style={{ color: solid ? 'var(--text-primary)' : 'white', borderColor: solid ? 'var(--border-default)' : 'rgba(255,255,255,0.35)' }}>
                 Log in
               </Link>
-              <Link href="/signup" className="navbar-btn-gold">
+              <Link href="/coming-soon" className="navbar-btn-gold">
                 Sign Up
               </Link>
             </div>
