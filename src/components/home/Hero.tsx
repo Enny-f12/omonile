@@ -232,10 +232,10 @@ export function Hero() {
           <Link href="/listings" className="omonile-cta-gold">
             Browse Properties <ArrowRight size={17} />
           </Link>
-          <Link href="/listings/new" className="omonile-cta-ghost">
+          <Link href="/listings" className="omonile-cta-ghost">
             List Properties <ArrowRight size={17} />
           </Link>
-          <Link href="/listings/new" className="omonile-cta-ghost">
+          <Link href="/how-it-works" className="omonile-cta-ghost">
             I am a professional <ArrowRight size={17} />
           </Link>
         </div>

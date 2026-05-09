@@ -572,10 +572,10 @@ export function ForSellersSection() {
           </div>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-          <Link href="/listings/sale/new" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '7px', padding: '0.85rem 1.75rem', borderRadius: '9999px', border: '1px solid #fff', background: '#fff', color: '#7a5520', fontFamily: 'var(--font-body)', fontWeight: 700, fontSize: '0.9rem', textDecoration: 'none' }}>
+          <Link href="/coming-soon" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '7px', padding: '0.85rem 1.75rem', borderRadius: '9999px', border: '1px solid #fff', background: '#fff', color: '#7a5520', fontFamily: 'var(--font-body)', fontWeight: 700, fontSize: '0.9rem', textDecoration: 'none' }}>
             List Your Property Now <ArrowRight size={16} strokeWidth={2.5} />
           </Link>
-          <Link href="/contact" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '7px', padding: '0.7rem 1.5rem', borderRadius: '9999px', border: '1px solid rgba(255,255,255,0.35)', background: 'transparent', color: 'white', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '0.875rem', textDecoration: 'none' }}>
+          <Link href="/coming-soon" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '7px', padding: '0.7rem 1.5rem', borderRadius: '9999px', border: '1px solid rgba(255,255,255,0.35)', background: 'transparent', color: 'white', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '0.875rem', textDecoration: 'none' }}>
             Speak with a Listing Expert
           </Link>
         </div>
