@@ -116,7 +116,7 @@ export function ForBuyers() {
             >
               Browse Properties <ArrowRight size={16} />
             </Link>
-            <Link href="/verify" style={{
+            <Link href="/coming-soon" style={{
               display: 'inline-flex', alignItems: 'center', gap: '7px',
               padding: '0.85rem 1.75rem', borderRadius: '9999px',
               border: '1.5px solid rgba(255,255,255,0.8)', color: 'rgba(255,255,255, 1)',
@@ -266,18 +266,17 @@ export function ForSellers() {
           </ul>
 
           <div>
-            <Link href="/listings/new" style={{
+            <Link href="/coming-soon" style={{
               display: 'inline-flex', alignItems: 'center', gap: '7px',
               padding: '0.85rem 1.75rem', borderRadius: '9999px',
-              background: '#e8a84c', color: '#0d3d22',
-              fontFamily: 'var(--font-body)', fontWeight: 700, fontSize: '0.9rem',
-              textDecoration: 'none', boxShadow: '0 6px 24px rgba(26,107,60,0.3)',
-              transition: 'all 200ms ease',
+              border: '1.5px solid rgba(255,255,255,0.8)', color: 'rgba(255,255,255, 1)',
+              fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '0.9rem',
+              textDecoration: 'none', transition: 'all 200ms ease',
             }}
-              onMouseEnter={e => { const a = e.currentTarget as HTMLAnchorElement; a.style.background = '#22883f'; a.style.transform = 'translateY(-2px)'; }}
-              onMouseLeave={e => { const a = e.currentTarget as HTMLAnchorElement; a.style.background = '#1a6b3c'; a.style.transform = 'none'; }}
+              onMouseEnter={e => { const a = e.currentTarget as HTMLAnchorElement; a.style.borderColor = 'rgba(255,255,255,0.5)'; a.style.color = 'white'; }}
+              onMouseLeave={e => { const a = e.currentTarget as HTMLAnchorElement; a.style.borderColor = 'rgba(255,255,255,0.2)'; a.style.color = 'rgba(255,255,255,0.8)'; }}
             >
-              List your Property <ArrowRight size={16} />
+              List your Property
             </Link>
           </div>
         </div>
@@ -362,7 +361,7 @@ export function ForRenters() {
           </ul>
 
           <div>
-            <Link href="/listings?type=short-let" style={{
+            <Link href="/coming-soon" style={{
               display: 'inline-flex', alignItems: 'center', gap: '7px',
               padding: '0.85rem 1.75rem', borderRadius: '9999px',
               background: '#1a6b3c', color: '#ffffff',

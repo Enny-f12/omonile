@@ -1,6 +1,6 @@
 'use client';
 
-import { useState} from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { Mail, ArrowRight, CheckCircle2, Bell, Rocket, Heart } from 'lucide-react';
 
@@ -21,7 +21,6 @@ export default function ComingSoon() {
     if (email.trim()) { setSubmitted(true); setEmail(''); }
   };
 
-  const pad = (n: number) => String(n).padStart(2, '0');
 
   return (
     <main style={{
@@ -39,10 +38,10 @@ export default function ComingSoon() {
       <div style={{ position: 'absolute', bottom: '-80px', left: '-80px', width: '340px', height: '340px', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.06)', pointerEvents: 'none' }} />
       <div style={{ position: 'absolute', top: '40%', left: '-160px', width: '320px', height: '320px', borderRadius: '50%', border: '1px solid rgba(232,168,76,0.08)', pointerEvents: 'none' }} />
 
-     
+      
 
       {/* Badge */}
-      <span style={{ display: 'inline-block', padding: '0.3rem 1rem', borderRadius: '9999px', background: 'rgba(232,168,76,0.18)', border: '1px solid rgba(232,168,76,0.35)', fontFamily: 'var(--font-body)', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#e8a84c', marginBottom: '1.25rem', marginTop:'1.5rem' }}>
+      <span style={{ display: 'inline-block', padding: '0.3rem 1rem', borderRadius: '9999px', background: 'rgba(232,168,76,0.18)', border: '1px solid rgba(232,168,76,0.35)', fontFamily: 'var(--font-body)', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#e8a84c', marginBottom: '1.25rem' , marginTop:'3.5rem'}}>
         <Rocket size={13} strokeWidth={2} style={{ display: 'inline', marginRight: '5px', verticalAlign: 'middle' }} /> Launching Soon
       </span>
 
@@ -63,8 +62,8 @@ export default function ComingSoon() {
             <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.78rem', fontWeight: 600, color: 'rgba(255,255,255,0.5)', marginBottom: '0.75rem', letterSpacing: '0.07em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
               <Bell size={13} /> Get notified when we launch
             </p>
-            <form onSubmit={handleSubmit} style={{ display: 'flex', gap: '0.5rem' }}>
-              <div style={{ flex: 1, position: 'relative' }}>
+            <form onSubmit={handleSubmit} className="notify-form" style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+              <div style={{ flex: 1, minWidth: '200px', position: 'relative' }}>
                 <Mail size={15} color="rgba(255,255,255,0.35)" style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
                 <input
                   type="email"
@@ -141,8 +140,14 @@ export default function ComingSoon() {
       </div>
 
       <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.72rem', color: 'rgba(255,255,255,0.2)' }}>
-        © {new Date().getFullYear()} Chrivon Tech Solutions Ltd. Made with <Heart size={18} color='#dc2626' fill='#dc2626' strokeWidth={0} style={{ display: 'inline', verticalAlign: 'middle', margin: '0 2px' }} /> in Nigeria.
+        © {new Date().getFullYear()} Chrivon Tech Solutions Ltd. Made with <Heart size={11} color='#e8a84c' fill='#e8a84c' strokeWidth={0} style={{ display: 'inline', verticalAlign: 'middle', margin: '0 2px' }} /> in Nigeria.
       </p>
+      <style>{`
+        @media (max-width: 480px) {
+          .notify-form { flex-direction: column !important; }
+          .notify-form button { width: 100% !important; justify-content: center; }
+        }
+      `}</style>
     </main>
   );
 }

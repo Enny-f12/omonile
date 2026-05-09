@@ -152,10 +152,10 @@ export function Navbar() {
           </nav>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid var(--border-subtle)' }}>
-            <Link href="/login" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0.8rem', borderRadius: '9999px', border: '1px solid var(--border-default)', background: 'transparent', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '0.9rem', color: 'var(--text-primary)', textDecoration: 'none' }}>
+            <Link href="/coming-soon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0.8rem', borderRadius: '9999px', border: '1px solid var(--border-default)', background: 'transparent', fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: '0.9rem', color: 'var(--text-primary)', textDecoration: 'none' }}>
               Log in
             </Link>
-            <Link href="/signup" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0.8rem', borderRadius: '9999px', border: '1px solid #e8a84c', background: '#e8a84c', fontFamily: 'var(--font-body)', fontWeight: 700, fontSize: '0.9rem', color: '#0d3d22', textDecoration: 'none' }}>
+            <Link href="/coming-soon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0.8rem', borderRadius: '9999px', border: '1px solid #e8a84c', background: '#e8a84c', fontFamily: 'var(--font-body)', fontWeight: 700, fontSize: '0.9rem', color: '#0d3d22', textDecoration: 'none' }}>
               Sign Up Free
             </Link>
           </div>

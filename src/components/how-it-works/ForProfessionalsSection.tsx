@@ -295,7 +295,7 @@ export function ForProfessionalsSection() {
       <div style={{ marginTop: '3rem', padding: '2.5rem', background: `linear-gradient(135deg,#0d3d22,${B.brand})`, borderRadius: '16px', textAlign: 'center' }}>
         <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.5rem', color: '#fff', marginBottom: '0.5rem' }}>Ready to grow your professional practice?</h3>
         <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '1.5rem' }}>Join Nigeria&apos;s most trusted property verification network.</p>
-        <Link href="/professionals/apply" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', padding: '1rem 2rem', borderRadius: '9999px', background: B.accent, color: '#0d3d22', fontWeight: 700, textDecoration: 'none' }}>
+        <Link href="/coming-soon" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', padding: '1rem 2rem', borderRadius: '9999px', background: B.accent, color: '#0d3d22', fontWeight: 700, textDecoration: 'none' }}>
           Start Application <ArrowRight size={18} />
         </Link>
       </div>

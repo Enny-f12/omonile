@@ -5,8 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {
   ShieldCheck, Users, Building2, Star, BadgeCheck,
-  Scale, Wrench, Clock, Banknote, MapPin, Lock,
-  Zap, Heart, Globe, Award, CheckCircle2, ArrowRight, Quote,
+  Scale, MapPin, Lock,
+  Zap, Heart, Globe, ArrowRight, Quote,
 } from 'lucide-react';
 
 /* ─── DATA ──────────────────────────────────────────────────────── */
@@ -283,16 +283,16 @@ export default function AboutPage() {
           <div className="ab-story-grid">
 
             <div style={{ position: 'relative' }}>
+              
               <div className="ab-story-visual" style={{ padding: 0, overflow: 'hidden', background: 'none' }}>
-                <img
+                
+                <Image
                   src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80"
                   alt="Nigerian property — Nigeria's Land, Secured"
+                  fill
                   style={{
-                    width: '100%',
-                    height: '100%',
                     objectFit: 'cover',
                     objectPosition: 'center',
-                    display: 'block',
                     borderRadius: 'inherit',
                   }}
                 />
